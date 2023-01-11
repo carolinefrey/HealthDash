@@ -9,19 +9,33 @@
 /* Begin PBXBuildFile section */
 		B975C262296F6F720046044F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C261296F6F720046044F /* AppDelegate.swift */; };
 		B975C264296F6F720046044F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C263296F6F720046044F /* SceneDelegate.swift */; };
-		B975C266296F6F720046044F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C265296F6F720046044F /* ViewController.swift */; };
+		B975C266296F6F720046044F /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C265296F6F720046044F /* DashboardViewController.swift */; };
 		B975C26B296F6F730046044F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B975C26A296F6F730046044F /* Assets.xcassets */; };
 		B975C26E296F6F730046044F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B975C26C296F6F730046044F /* LaunchScreen.storyboard */; };
+		B975C27B296F71E90046044F /* GreetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C27A296F71E90046044F /* GreetingView.swift */; };
+		B975C280296F75500046044F /* Oxygen-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B975C27D296F75430046044F /* Oxygen-Regular.ttf */; };
+		B975C281296F75520046044F /* Oxygen-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B975C27E296F75460046044F /* Oxygen-Bold.ttf */; };
+		B975C282296F75540046044F /* Oxygen-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B975C27F296F75490046044F /* Oxygen-Light.ttf */; };
+		B975C284296F75EE0046044F /* DashboardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C283296F75EE0046044F /* DashboardCollectionView.swift */; };
+		B975C286296F76EB0046044F /* DashboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C285296F76EB0046044F /* DashboardCollectionViewCell.swift */; };
+		B975C288296F78E60046044F /* DashboardContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C287296F78E60046044F /* DashboardContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B975C25E296F6F720046044F /* HealthDash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B975C261296F6F720046044F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B975C263296F6F720046044F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B975C265296F6F720046044F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B975C265296F6F720046044F /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		B975C26A296F6F730046044F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B975C26D296F6F730046044F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B975C26F296F6F730046044F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B975C27A296F71E90046044F /* GreetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetingView.swift; sourceTree = "<group>"; };
+		B975C27D296F75430046044F /* Oxygen-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxygen-Regular.ttf"; sourceTree = "<group>"; };
+		B975C27E296F75460046044F /* Oxygen-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxygen-Bold.ttf"; sourceTree = "<group>"; };
+		B975C27F296F75490046044F /* Oxygen-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxygen-Light.ttf"; sourceTree = "<group>"; };
+		B975C283296F75EE0046044F /* DashboardCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCollectionView.swift; sourceTree = "<group>"; };
+		B975C285296F76EB0046044F /* DashboardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCollectionViewCell.swift; sourceTree = "<group>"; };
+		B975C287296F78E60046044F /* DashboardContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +68,7 @@
 		B975C260296F6F720046044F /* HealthDash */ = {
 			isa = PBXGroup;
 			children = (
+				B975C27C296F75390046044F /* Oxygen */,
 				B975C276296F70D50046044F /* Model */,
 				B975C275296F70C60046044F /* View */,
 				B975C277296F70D90046044F /* Controller */,
@@ -68,6 +83,10 @@
 		B975C275296F70C60046044F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B975C287296F78E60046044F /* DashboardContentView.swift */,
+				B975C27A296F71E90046044F /* GreetingView.swift */,
+				B975C283296F75EE0046044F /* DashboardCollectionView.swift */,
+				B975C285296F76EB0046044F /* DashboardCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -82,7 +101,7 @@
 		B975C277296F70D90046044F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B975C265296F6F720046044F /* ViewController.swift */,
+				B975C265296F6F720046044F /* DashboardViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -94,6 +113,16 @@
 				B975C263296F6F720046044F /* SceneDelegate.swift */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B975C27C296F75390046044F /* Oxygen */ = {
+			isa = PBXGroup;
+			children = (
+				B975C27D296F75430046044F /* Oxygen-Regular.ttf */,
+				B975C27E296F75460046044F /* Oxygen-Bold.ttf */,
+				B975C27F296F75490046044F /* Oxygen-Light.ttf */,
+			);
+			path = Oxygen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,8 +183,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B975C280296F75500046044F /* Oxygen-Regular.ttf in Resources */,
 				B975C26E296F6F730046044F /* LaunchScreen.storyboard in Resources */,
 				B975C26B296F6F730046044F /* Assets.xcassets in Resources */,
+				B975C281296F75520046044F /* Oxygen-Bold.ttf in Resources */,
+				B975C282296F75540046044F /* Oxygen-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,8 +198,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B975C266296F6F720046044F /* ViewController.swift in Sources */,
+				B975C286296F76EB0046044F /* DashboardCollectionViewCell.swift in Sources */,
+				B975C266296F6F720046044F /* DashboardViewController.swift in Sources */,
+				B975C27B296F71E90046044F /* GreetingView.swift in Sources */,
+				B975C284296F75EE0046044F /* DashboardCollectionView.swift in Sources */,
 				B975C262296F6F720046044F /* AppDelegate.swift in Sources */,
+				B975C288296F78E60046044F /* DashboardContentView.swift in Sources */,
 				B975C264296F6F720046044F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

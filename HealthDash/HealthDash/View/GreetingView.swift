@@ -17,6 +17,7 @@ class GreetingView: UIView {
         greeting.text = "Good morning!"
         greeting.textAlignment = .left
         greeting.font = UIFont(name: "Oxygen-Bold", size: 36)
+        greeting.textColor = UIColor(named: "GreetingText")
         return greeting
     }()
     

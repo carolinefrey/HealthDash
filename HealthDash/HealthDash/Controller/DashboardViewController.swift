@@ -11,14 +11,14 @@ class DashboardViewController: UIViewController {
     
     // MARK: - UI Properties
     
-    private var contentView: DashboardContentView!
+    private var contentView: MainContentView!
 
     // MARK: - Lifecycle
 
     override func loadView() {
         super.loadView()
         
-        contentView = DashboardContentView()
+        contentView = MainContentView()
         view = contentView
         
         configureCollectionView()
@@ -26,7 +26,7 @@ class DashboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
+        //view.backgroundColor = .black
     }
     
     // MARK: - Functions

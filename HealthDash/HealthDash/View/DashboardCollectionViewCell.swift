@@ -16,7 +16,7 @@ class DashboardCollectionViewCell: UICollectionViewCell {
     let backgroundCell: UIView = {
         let cell = UIView()
         cell.translatesAutoresizingMaskIntoConstraints = false
-        cell.backgroundColor = .red
+        cell.backgroundColor = .white
         cell.clipsToBounds = true
         cell.layer.cornerRadius = 20
         return cell

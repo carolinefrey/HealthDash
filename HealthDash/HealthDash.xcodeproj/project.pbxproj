@@ -18,7 +18,7 @@
 		B975C282296F75540046044F /* Oxygen-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B975C27F296F75490046044F /* Oxygen-Light.ttf */; };
 		B975C284296F75EE0046044F /* DashboardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C283296F75EE0046044F /* DashboardCollectionView.swift */; };
 		B975C286296F76EB0046044F /* DashboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C285296F76EB0046044F /* DashboardCollectionViewCell.swift */; };
-		B975C288296F78E60046044F /* DashboardContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C287296F78E60046044F /* DashboardContentView.swift */; };
+		B975C288296F78E60046044F /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C287296F78E60046044F /* MainContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +35,7 @@
 		B975C27F296F75490046044F /* Oxygen-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxygen-Light.ttf"; sourceTree = "<group>"; };
 		B975C283296F75EE0046044F /* DashboardCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCollectionView.swift; sourceTree = "<group>"; };
 		B975C285296F76EB0046044F /* DashboardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCollectionViewCell.swift; sourceTree = "<group>"; };
-		B975C287296F78E60046044F /* DashboardContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardContentView.swift; sourceTree = "<group>"; };
+		B975C287296F78E60046044F /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +83,7 @@
 		B975C275296F70C60046044F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B975C287296F78E60046044F /* DashboardContentView.swift */,
+				B975C287296F78E60046044F /* MainContentView.swift */,
 				B975C27A296F71E90046044F /* GreetingView.swift */,
 				B975C283296F75EE0046044F /* DashboardCollectionView.swift */,
 				B975C285296F76EB0046044F /* DashboardCollectionViewCell.swift */,
@@ -203,7 +203,7 @@
 				B975C27B296F71E90046044F /* GreetingView.swift in Sources */,
 				B975C284296F75EE0046044F /* DashboardCollectionView.swift in Sources */,
 				B975C262296F6F720046044F /* AppDelegate.swift in Sources */,
-				B975C288296F78E60046044F /* DashboardContentView.swift in Sources */,
+				B975C288296F78E60046044F /* MainContentView.swift in Sources */,
 				B975C264296F6F720046044F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DashboardContentView: UIView {
+class MainContentView: UIView {
 
     // MARK: - UI Properties
     
@@ -28,7 +28,7 @@ class DashboardContentView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = UIColor(named: "Background")
+        backgroundColor = UIColor(named: "MainBackground")
         
         configureViews()
     }

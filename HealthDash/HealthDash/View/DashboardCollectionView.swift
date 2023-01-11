@@ -14,15 +14,14 @@ class DashboardCollectionView: UIView {
     lazy var dataCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: 150, height: 150)
-        layout.sectionInset = UIEdgeInsets(top: 24, left: 30, bottom: 24, right: 30)
-        layout.headerReferenceSize = CGSize(width: frame.size.width, height: 35)
+        layout.itemSize = CGSize(width: 170, height: 170)
+        layout.sectionInset = UIEdgeInsets(top: 48, left: 15, bottom: 48, right: 15)
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.register(DashboardCollectionViewCell.self, forCellWithReuseIdentifier: DashboardCollectionViewCell.dashboardCollectionViewCellIdentifier)
         collection.layer.cornerRadius = 20
-        collection.backgroundColor = .white
+        collection.backgroundColor = UIColor(named: "CollectionViewBackground")
         return collection
     }()
     

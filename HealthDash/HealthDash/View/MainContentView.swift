@@ -44,8 +44,8 @@ class MainContentView: UIView {
         addSubview(dashboardCollectionView)
                         
         NSLayoutConstraint.activate([
-            greetingView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            greetingView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            greetingView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            greetingView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             greetingView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             greetingView.heightAnchor.constraint(equalToConstant: 80),
             

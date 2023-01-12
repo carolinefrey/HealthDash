@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import HealthKit
 
 class DashboardViewController: UIViewController {
     
+    private var healthStore: HealthStore?
+
     // MARK: - UI Properties
     
     private var contentView: MainContentView!
@@ -17,16 +20,23 @@ class DashboardViewController: UIViewController {
 
     override func loadView() {
         super.loadView()
-        
+            
         contentView = MainContentView()
         view = contentView
         
         configureCollectionView()
+        
+        healthStore = HealthStore()
+        
+        if let healthStore = healthStore {
+            healthStore.requestAuthorization { success in
+                //TODO: more code here
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //view.backgroundColor = .black
     }
     
     // MARK: - Functions
@@ -45,6 +55,12 @@ extension DashboardViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DashboardCollectionViewCell.dashboardCollectionViewCellIdentifier, for: indexPath) as! DashboardCollectionViewCell
+
+        var array = [Data]()
+        Data.allCases.forEach { data in
+            array.append(data)
+        }
+        cell.configureCell(data: array[indexPath.row])
         return cell
     }
 }

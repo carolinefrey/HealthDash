@@ -19,6 +19,7 @@
 		B975C284296F75EE0046044F /* DashboardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C283296F75EE0046044F /* DashboardCollectionView.swift */; };
 		B975C286296F76EB0046044F /* DashboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C285296F76EB0046044F /* DashboardCollectionViewCell.swift */; };
 		B975C288296F78E60046044F /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C287296F78E60046044F /* MainContentView.swift */; };
+		B9B9A5A529702DF5004719D6 /* HealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B9A5A429702DF5004719D6 /* HealthStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,8 @@
 		B975C283296F75EE0046044F /* DashboardCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCollectionView.swift; sourceTree = "<group>"; };
 		B975C285296F76EB0046044F /* DashboardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCollectionViewCell.swift; sourceTree = "<group>"; };
 		B975C287296F78E60046044F /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
+		B9B9A5A329702DB1004719D6 /* HealthDash.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthDash.entitlements; sourceTree = "<group>"; };
+		B9B9A5A429702DF5004719D6 /* HealthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +71,7 @@
 		B975C260296F6F720046044F /* HealthDash */ = {
 			isa = PBXGroup;
 			children = (
+				B9B9A5A329702DB1004719D6 /* HealthDash.entitlements */,
 				B975C27C296F75390046044F /* Oxygen */,
 				B975C276296F70D50046044F /* Model */,
 				B975C275296F70C60046044F /* View */,
@@ -94,6 +98,7 @@
 		B975C276296F70D50046044F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B9B9A5A429702DF5004719D6 /* HealthStore.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9B9A5A529702DF5004719D6 /* HealthStore.swift in Sources */,
 				B975C286296F76EB0046044F /* DashboardCollectionViewCell.swift in Sources */,
 				B975C266296F6F720046044F /* DashboardViewController.swift in Sources */,
 				B975C27B296F71E90046044F /* GreetingView.swift in Sources */,
@@ -341,6 +347,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HealthDash/HealthDash.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 794RQQKASN;
@@ -368,6 +375,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HealthDash/HealthDash.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 794RQQKASN;

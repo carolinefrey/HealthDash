@@ -17,7 +17,7 @@ class GreetingView: UIView {
         greeting.text = "Good morning!"
         greeting.textAlignment = .left
         greeting.font = UIFont(name: "Oxygen-Bold", size: 36)
-        greeting.textColor = UIColor(named: "GreetingText")
+        greeting.textColor = UIColor(named: "Navy")
         return greeting
     }()
     
@@ -39,8 +39,8 @@ class GreetingView: UIView {
         addSubview(greetingLabel)
         
         NSLayoutConstraint.activate([
-            greetingLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            greetingLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
+            greetingLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            greetingLabel.leadingAnchor.constraint(equalTo: leadingAnchor)
         ])
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 class DashboardCollectionView: UIView {
-
+    
     // MARK: - UI Properties
     
     lazy var dataCollectionView: UICollectionView = {

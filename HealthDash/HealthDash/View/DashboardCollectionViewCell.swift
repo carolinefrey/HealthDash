@@ -56,16 +56,20 @@ class DashboardCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Functions
     
-    func configureCell(data: Data) {
-        switch data {
+    func configureCell(dataType: Data, data: Double) {
+        switch dataType {
         case .sleep:
             icon.image = UIImage(systemName: "bed.double.fill")
+            dataText.text = "\(data)"
         case .weight:
             icon.image = UIImage(systemName: "figure.arms.open")
+            dataText.text = "\(data)"
         case .activeEnergy:
             icon.image = UIImage(systemName: "flame.fill")
+            dataText.text = "\(data)"
         case .steps:
             icon.image = UIImage(systemName: "shoeprints.fill")
+            dataText.text = "\(data)"
         }
     }
 
@@ -83,12 +87,12 @@ class DashboardCollectionViewCell: UICollectionViewCell {
             backgroundCell.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundCell.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            icon.topAnchor.constraint(equalTo: backgroundCell.topAnchor, constant: 20),
-            icon.centerXAnchor.constraint(equalTo: backgroundCell.centerXAnchor),
-            icon.heightAnchor.constraint(equalToConstant: 40),
-            icon.widthAnchor.constraint(equalToConstant: 40),
+            icon.topAnchor.constraint(equalTo: backgroundCell.topAnchor, constant: 10),
+            icon.leadingAnchor.constraint(equalTo: backgroundCell.leadingAnchor, constant: 5),
+            icon.heightAnchor.constraint(equalToConstant: 35),
+            icon.widthAnchor.constraint(equalToConstant: 35),
             
-            dataText.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 20),
+            dataText.centerYAnchor.constraint(equalTo: backgroundCell.centerYAnchor),
             dataText.centerXAnchor.constraint(equalTo: backgroundCell.centerXAnchor),
         ])
     }

@@ -11,6 +11,10 @@ import HealthKit
 class DashboardViewController: UIViewController {
     
     private var healthStore: HealthStore?
+    var stepCount = -1.0
+    var weight = -1.0
+    var sleepDuration = -1.0
+    var activeEnergy = -1.0
 
     // MARK: - UI Properties
     
@@ -30,9 +34,11 @@ class DashboardViewController: UIViewController {
         
         if let healthStore = healthStore {
             healthStore.requestAuthorization { success in
-                //TODO: more code here
+                //TODO: more code here?
             }
         }
+        getStepsData()
+        getWeightData()
     }
     
     override func viewDidLoad() {
@@ -43,6 +49,22 @@ class DashboardViewController: UIViewController {
     
     private func configureCollectionView() {
         contentView.dashboardCollectionView.dataCollectionView.dataSource = self
+    }
+    
+    func getStepsData() {
+        healthStore?.calculateSteps(completion: { steps in
+            if steps > 0 {
+                self.stepCount = steps
+            }
+        })
+    }
+    
+    func getWeightData() {
+        healthStore?.retrieveWeight(completion: { weight in
+            if weight > 0 {
+                self.weight = weight
+            }
+        })
     }
 }
 
@@ -60,7 +82,17 @@ extension DashboardViewController: UICollectionViewDataSource {
         Data.allCases.forEach { data in
             array.append(data)
         }
-        cell.configureCell(data: array[indexPath.row])
+        
+        switch array[indexPath.row] {
+        case .sleep:
+            cell.configureCell(dataType: array[indexPath.row], data: sleepDuration)
+        case .weight:
+            cell.configureCell(dataType: array[indexPath.row], data: weight)
+        case .activeEnergy:
+            cell.configureCell(dataType: array[indexPath.row], data: activeEnergy)
+        case .steps:
+            cell.configureCell(dataType: array[indexPath.row], data: stepCount)
+        }
         return cell
     }
 }

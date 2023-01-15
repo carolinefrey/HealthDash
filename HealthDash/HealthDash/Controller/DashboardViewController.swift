@@ -39,6 +39,7 @@ class DashboardViewController: UIViewController {
         }
         getStepsData()
         getWeightData()
+        getActiveEnergyData()
     }
     
     override func viewDidLoad() {
@@ -52,19 +53,27 @@ class DashboardViewController: UIViewController {
     }
     
     func getStepsData() {
-        healthStore?.calculateSteps(completion: { steps in
+        healthStore?.calculateSteps { steps in
             if steps > 0 {
                 self.stepCount = steps
             }
-        })
+        }
     }
     
     func getWeightData() {
-        healthStore?.retrieveWeight(completion: { weight in
+        healthStore?.retrieveWeight { weight in
             if weight > 0 {
                 self.weight = weight
             }
-        })
+        }
+    }
+    
+    func getActiveEnergyData() {
+        healthStore?.calculateActiveEnergy { calories in
+            if calories > 0 {
+                self.activeEnergy = calories
+            }
+        }
     }
 }
 

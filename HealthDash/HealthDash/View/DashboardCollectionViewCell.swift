@@ -66,7 +66,8 @@ class DashboardCollectionViewCell: UICollectionViewCell {
             dataText.text = "\(data)"
         case .activeEnergy:
             icon.image = UIImage(systemName: "flame.fill")
-            dataText.text = "\(data)"
+            let formattedValue = String(format: "%.2f", data)
+            dataText.text = "\(formattedValue)"
         case .steps:
             icon.image = UIImage(systemName: "shoeprints.fill")
             dataText.text = "\(data)"

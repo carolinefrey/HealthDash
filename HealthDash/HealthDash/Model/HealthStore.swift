@@ -12,6 +12,7 @@ class HealthStore {
     
     var healthStore: HKHealthStore?
     var stepsQuery: HKStatisticsQuery?
+    var activeEnergyQuery: HKStatisticsQuery?
     var weightQuery: HKSampleQuery?
     
     init() {
@@ -99,6 +100,43 @@ class HealthStore {
         }
                                          
         if let healthStore = healthStore, let query = self.weightQuery {
+            healthStore.execute(query)
+        }
+    }
+    
+    func calculateActiveEnergy(completion: @escaping (Double) -> Void) {
+        guard let activeEnergyType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned) else {
+            fatalError("Unable to retrieve activeEnergy")
+        }
+        
+        let calendar = NSCalendar.current
+        let now = Date()
+        let components = calendar.dateComponents([.year, .month, .day], from: now)
+        
+        guard let startDate = calendar.date(from: components) else {
+            fatalError("Unable to create the start date")
+        }
+        guard let endDate = calendar.date(byAdding: .day, value: 1, to: startDate) else {
+            fatalError("Unable to create the end date")
+        }
+        
+        let today = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
+        
+        activeEnergyQuery = HKStatisticsQuery(quantityType: activeEnergyType, quantitySamplePredicate: today, options: .cumulativeSum) { (query, results, error ) in
+            
+            guard let statistics = results else {
+                // Handle errors here
+                return
+            }
+            
+            let sum = statistics.sumQuantity()
+            let totalActiveEnergy = sum?.doubleValue(for: HKUnit.kilocalorie())
+            
+            // Update app here
+            completion(totalActiveEnergy ?? -1)
+        }
+        
+        if let healthStore = healthStore, let query = self.activeEnergyQuery {
             healthStore.execute(query)
         }
     }

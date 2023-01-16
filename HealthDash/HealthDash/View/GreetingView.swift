@@ -14,7 +14,7 @@ class GreetingView: UIView {
     private let greetingLabel: UILabel = {
         let greeting = UILabel()
         greeting.translatesAutoresizingMaskIntoConstraints = false
-        greeting.text = "Good morning!"
+        greeting.text = "Today"
         greeting.textAlignment = .left
         greeting.font = UIFont(name: "Oxygen-Bold", size: 36)
         greeting.textColor = UIColor(named: "Navy")

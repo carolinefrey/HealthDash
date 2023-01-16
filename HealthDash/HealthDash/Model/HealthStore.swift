@@ -14,6 +14,7 @@ class HealthStore {
     var stepsQuery: HKStatisticsQuery?
     var activeEnergyQuery: HKStatisticsQuery?
     var weightQuery: HKSampleQuery?
+    var sleepQuery: HKSampleQuery?
     
     init() {
         if HKHealthStore.isHealthDataAvailable() {
@@ -98,7 +99,7 @@ class HealthStore {
             }
             completion(-1.0) // no data
         }
-                                         
+        
         if let healthStore = healthStore, let query = self.weightQuery {
             healthStore.execute(query)
         }
@@ -108,7 +109,7 @@ class HealthStore {
         guard let activeEnergyType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned) else {
             fatalError("Unable to retrieve activeEnergy")
         }
-        
+
         let calendar = NSCalendar.current
         let now = Date()
         let components = calendar.dateComponents([.year, .month, .day], from: now)
@@ -137,6 +138,49 @@ class HealthStore {
         }
         
         if let healthStore = healthStore, let query = self.activeEnergyQuery {
+            healthStore.execute(query)
+        }
+    }
+    
+    func retrieveSleep(completion: @escaping (Double) -> Void) {
+        guard let sleepType = HKSampleType.categoryType(forIdentifier: .sleepAnalysis) else {
+            fatalError("Unable to retrieve body mass")
+        }
+
+        let calendar = NSCalendar.current
+        let now = Date()
+        let components = calendar.dateComponents([.year, .month, .day], from: now)
+
+        guard let endDate = calendar.date(from: components) else {
+            fatalError("Unable to create the start date")
+        }
+        guard let startDate = calendar.date(byAdding: .day, value: -1, to: endDate) else {
+            fatalError("Unable to create the end date")
+        }
+
+        let today = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false) //get most recent data first
+
+        sleepQuery = HKSampleQuery(sampleType: sleepType, predicate: today, limit: HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor]) { (query, results, error) in
+            
+            var hoursSleepAggr = 0.0
+            if let result = results {
+                for item in result {
+                    if let sample = item as? HKCategorySample {
+                        if sample.value == HKCategoryValueSleepAnalysis.inBed.rawValue && sample.startDate >= startDate {
+                            let sleepTime = sample.endDate.timeIntervalSince(sample.startDate)
+                            let secondsInAnHour = 3600.0
+                            let hoursBetweenDates = sleepTime / secondsInAnHour
+                            hoursSleepAggr += hoursBetweenDates
+                        }
+                    }
+                }
+                completion(hoursSleepAggr)
+            }
+        }
+
+        if let healthStore = healthStore, let query = self.sleepQuery {
             healthStore.execute(query)
         }
     }

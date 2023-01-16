@@ -49,7 +49,7 @@ class MainContentView: UIView {
             greetingView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             greetingView.heightAnchor.constraint(equalToConstant: 80),
             
-            dashboardCollectionView.topAnchor.constraint(equalTo: greetingView.bottomAnchor, constant: 20),
+            dashboardCollectionView.topAnchor.constraint(equalTo: greetingView.bottomAnchor),
             dashboardCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             dashboardCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             dashboardCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),

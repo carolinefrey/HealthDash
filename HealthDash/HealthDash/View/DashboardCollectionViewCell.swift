@@ -36,10 +36,18 @@ class DashboardCollectionViewCell: UICollectionViewCell {
     let dataText: UILabel = {
         let text = UILabel()
         text.translatesAutoresizingMaskIntoConstraints = false
-        text.text = "123"
         text.textAlignment = .center
         text.textColor = UIColor(named: "Navy")
         text.font = UIFont(name: "Oxygen-Regular", size: 36)
+        return text
+    }()
+    
+    let dataLabel: UILabel = {
+        let text = UILabel()
+        text.translatesAutoresizingMaskIntoConstraints = false
+        text.textAlignment = .center
+        text.textColor = UIColor(named: "Navy")
+        text.font = UIFont(name: "Oxygen-Regular", size: 18)
         return text
     }()
     
@@ -60,17 +68,22 @@ class DashboardCollectionViewCell: UICollectionViewCell {
         switch dataType {
         case .sleep:
             icon.image = UIImage(systemName: "bed.double.fill")
-            dataText.text = "\(data)"
+            let formattedValue = String(format: "%.2f", data)
+            dataText.text = "\(formattedValue)"
+            dataLabel.text = "hours in bed"
         case .weight:
             icon.image = UIImage(systemName: "figure.arms.open")
             dataText.text = "\(data)"
+            dataLabel.text = "pounds"
         case .activeEnergy:
             icon.image = UIImage(systemName: "flame.fill")
             let formattedValue = String(format: "%.2f", data)
             dataText.text = "\(formattedValue)"
+            dataLabel.text = "calories burned"
         case .steps:
             icon.image = UIImage(systemName: "shoeprints.fill")
             dataText.text = "\(data)"
+            dataLabel.text = "steps"
         }
     }
 
@@ -81,6 +94,7 @@ class DashboardCollectionViewCell: UICollectionViewCell {
         addSubview(backgroundCell)
         addSubview(icon)
         addSubview(dataText)
+        addSubview(dataLabel)
         
         NSLayoutConstraint.activate([
             backgroundCell.topAnchor.constraint(equalTo: topAnchor),
@@ -93,8 +107,11 @@ class DashboardCollectionViewCell: UICollectionViewCell {
             icon.heightAnchor.constraint(equalToConstant: 35),
             icon.widthAnchor.constraint(equalToConstant: 35),
             
-            dataText.centerYAnchor.constraint(equalTo: backgroundCell.centerYAnchor),
             dataText.centerXAnchor.constraint(equalTo: backgroundCell.centerXAnchor),
+            dataText.centerYAnchor.constraint(equalTo: backgroundCell.centerYAnchor),
+            
+            dataLabel.centerXAnchor.constraint(equalTo: backgroundCell.centerXAnchor),
+            dataLabel.topAnchor.constraint(equalTo: dataText.bottomAnchor),
         ])
     }
 }

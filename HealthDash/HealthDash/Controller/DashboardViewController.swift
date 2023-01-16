@@ -11,10 +11,10 @@ import HealthKit
 class DashboardViewController: UIViewController {
     
     private var healthStore: HealthStore?
-    var stepCount = -1.0
-    var weight = -1.0
-    var sleepDuration = -1.0
-    var activeEnergy = -1.0
+    var stepCount = 0.0
+    var weight = 0.0
+    var sleepDuration = 0.0
+    var activeEnergy = 0.0
 
     // MARK: - UI Properties
     
@@ -35,11 +35,14 @@ class DashboardViewController: UIViewController {
         if let healthStore = healthStore {
             healthStore.requestAuthorization { success in
                 //TODO: more code here?
+                
             }
         }
+        
         getStepsData()
         getWeightData()
         getActiveEnergyData()
+        getSleepDuration()
     }
     
     override func viewDidLoad() {
@@ -72,6 +75,14 @@ class DashboardViewController: UIViewController {
         healthStore?.calculateActiveEnergy { calories in
             if calories > 0 {
                 self.activeEnergy = calories
+            }
+        }
+    }
+    
+    func getSleepDuration() {
+        healthStore?.retrieveSleep { duration in
+            if duration > 0 {
+                self.sleepDuration = duration
             }
         }
     }

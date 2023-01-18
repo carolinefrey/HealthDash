@@ -39,6 +39,7 @@ class DashboardCollectionViewCell: UICollectionViewCell {
         text.textAlignment = .center
         text.textColor = UIColor(named: "Navy")
         text.font = UIFont(name: "Oxygen-Regular", size: 36)
+        text.adjustsFontSizeToFitWidth = true
         return text
     }()
     
@@ -68,21 +69,30 @@ class DashboardCollectionViewCell: UICollectionViewCell {
         switch dataType {
         case .sleep:
             icon.image = UIImage(systemName: "bed.double.fill")
-            let formattedValue = String(format: "%.2f", data)
-            dataText.text = "\(formattedValue)"
-            dataLabel.text = "hours in bed"
+            
+            //convert seconds to hours & minutes
+            let secondsInAnHour = 3600.0
+            let hours = data / secondsInAnHour
+            let remainder = hours.truncatingRemainder(dividingBy: 1)
+            let minutesRemaining = remainder * 60
+            let hoursFormatted = String(format: "%.0f", hours)
+            let minutes = String(format: "%.0f", minutesRemaining)
+            
+            dataText.text = "\(hoursFormatted) hrs \(minutes) min"
+            dataLabel.text = "in bed"
         case .weight:
             icon.image = UIImage(systemName: "figure.arms.open")
             dataText.text = "\(data)"
             dataLabel.text = "pounds"
         case .activeEnergy:
             icon.image = UIImage(systemName: "flame.fill")
-            let formattedValue = String(format: "%.2f", data)
+            let formattedValue = String(format: "%.0f", data)
             dataText.text = "\(formattedValue)"
             dataLabel.text = "calories burned"
         case .steps:
             icon.image = UIImage(systemName: "shoeprints.fill")
-            dataText.text = "\(data)"
+            let formattedValue = String(format: "%.0f", data)
+            dataText.text = "\(formattedValue)"
             dataLabel.text = "steps"
         }
     }
@@ -109,6 +119,8 @@ class DashboardCollectionViewCell: UICollectionViewCell {
             
             dataText.centerXAnchor.constraint(equalTo: backgroundCell.centerXAnchor),
             dataText.centerYAnchor.constraint(equalTo: backgroundCell.centerYAnchor),
+            dataText.leadingAnchor.constraint(equalTo: backgroundCell.leadingAnchor, constant: 10),
+            dataText.trailingAnchor.constraint(equalTo: backgroundCell.trailingAnchor, constant: -10),
             
             dataLabel.centerXAnchor.constraint(equalTo: backgroundCell.centerXAnchor),
             dataLabel.topAnchor.constraint(equalTo: dataText.bottomAnchor),

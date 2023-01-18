@@ -19,34 +19,30 @@ class DashboardViewController: UIViewController {
     // MARK: - UI Properties
     
     private var contentView: MainContentView!
-
+    
     // MARK: - Lifecycle
 
     override func loadView() {
         super.loadView()
-            
+
         contentView = MainContentView()
         view = contentView
         
         configureCollectionView()
         
+        contentView.refreshButton.addTarget(self, action: #selector(fetchHealthData), for: .touchUpInside)
+        
         healthStore = HealthStore()
-        
-        if let healthStore = healthStore {
-            healthStore.requestAuthorization { success in
-                //TODO: more code here?
-                
-            }
-        }
-        
-        getStepsData()
-        getWeightData()
-        getActiveEnergyData()
-        getSleepDuration()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let healthStore = healthStore {
+            healthStore.requestAuthorization { success in
+
+            }
+        }
     }
     
     // MARK: - Functions
@@ -55,35 +51,36 @@ class DashboardViewController: UIViewController {
         contentView.dashboardCollectionView.dataCollectionView.dataSource = self
     }
     
-    func getStepsData() {
+    func getHealthData() {
         healthStore?.calculateSteps { steps in
             if steps > 0 {
                 self.stepCount = steps
             }
         }
-    }
-    
-    func getWeightData() {
+        
         healthStore?.retrieveWeight { weight in
             if weight > 0 {
                 self.weight = weight
             }
         }
-    }
-    
-    func getActiveEnergyData() {
+        
         healthStore?.calculateActiveEnergy { calories in
             if calories > 0 {
                 self.activeEnergy = calories
             }
         }
-    }
-    
-    func getSleepDuration() {
-        healthStore?.retrieveSleep { duration in
+        
+        healthStore?.calculateSleep { duration in
             if duration > 0 {
                 self.sleepDuration = duration
             }
+        }
+    }
+    
+    @objc func fetchHealthData() {
+        getHealthData()
+        DispatchQueue.main.async {
+            self.contentView.dashboardCollectionView.dataCollectionView.reloadData()
         }
     }
 }

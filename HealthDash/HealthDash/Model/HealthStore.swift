@@ -142,7 +142,7 @@ class HealthStore {
         }
     }
     
-    func retrieveSleep(completion: @escaping (Double) -> Void) {
+    func calculateSleep(completion: @escaping (Double) -> Void) {
         guard let sleepType = HKSampleType.categoryType(forIdentifier: .sleepAnalysis) else {
             fatalError("Unable to retrieve body mass")
         }
@@ -158,25 +158,36 @@ class HealthStore {
             fatalError("Unable to create the end date")
         }
 
-        let today = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+        let today = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [.strictStartDate])
 
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false) //get most recent data first
 
         sleepQuery = HKSampleQuery(sampleType: sleepType, predicate: today, limit: HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor]) { (query, results, error) in
             
-            var hoursSleepAggr = 0.0
+            var timeInBed = 0.0
             if let result = results {
+//                if let sample = result.first as? HKCategorySample {
+//                    if sample.value == HKCategoryValueSleepAnalysis.inBed.rawValue && sample.startDate >= startDate {
+//                        let sleepTime = sample.endDate.timeIntervalSince(sample.startDate)
+//                        let secondsInAnHour = 3600.0
+//                        let hoursBetweenDates = sleepTime / secondsInAnHour
+//                        timeInBed += hoursBetweenDates
+//
+//                        print("startDate: \(sample.startDate), endDate: \(sample.endDate)")
+//                        print("sleepTime = \(sleepTime)")
+//                        print("hoursBetweenDates = \(hoursBetweenDates)")
+//                        print("timeInBed = \(timeInBed)\n")
+//                    }
+//                }
                 for item in result {
                     if let sample = item as? HKCategorySample {
                         if sample.value == HKCategoryValueSleepAnalysis.inBed.rawValue && sample.startDate >= startDate {
                             let sleepTime = sample.endDate.timeIntervalSince(sample.startDate)
-                            let secondsInAnHour = 3600.0
-                            let hoursBetweenDates = sleepTime / secondsInAnHour
-                            hoursSleepAggr += hoursBetweenDates
+                            timeInBed += sleepTime
                         }
                     }
                 }
-                completion(hoursSleepAggr)
+                completion(timeInBed)
             }
         }
 

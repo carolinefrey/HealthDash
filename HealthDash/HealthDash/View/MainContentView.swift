@@ -23,16 +23,6 @@ class MainContentView: UIView {
         return collection
     }()
     
-    lazy var refreshButton: UIButton = {
-        let config = UIImage.SymbolConfiguration(pointSize: 30)
-        let icon = UIImage(systemName: "goforward.plus", withConfiguration: config)
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = UIColor(named: "Navy")
-        button.setImage(icon, for: .normal)
-        return button
-    }()
-    
     //MARK: - Initializers
     
     override init(frame: CGRect) {
@@ -50,14 +40,10 @@ class MainContentView: UIView {
     // MARK: - UI Setup
     
     private func configureViews() {
-        addSubview(refreshButton)
         addSubview(greetingView)
         addSubview(dashboardCollectionView)
                         
-        NSLayoutConstraint.activate([
-            refreshButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            refreshButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            
+        NSLayoutConstraint.activate([            
             greetingView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             greetingView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             greetingView.heightAnchor.constraint(equalToConstant: 80),

@@ -29,20 +29,19 @@ class DashboardViewController: UIViewController {
         view = contentView
         
         configureCollectionView()
-        
-        contentView.refreshButton.addTarget(self, action: #selector(fetchHealthData), for: .touchUpInside)
-        
+        contentView.greetingView.configureGreeting()
+                
         healthStore = HealthStore()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
         
         if let healthStore = healthStore {
             healthStore.requestAuthorization { success in
 
             }
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     // MARK: - Functions
@@ -76,13 +75,6 @@ class DashboardViewController: UIViewController {
             }
         }
     }
-    
-    @objc func fetchHealthData() {
-        getHealthData()
-        DispatchQueue.main.async {
-            self.contentView.dashboardCollectionView.dataCollectionView.reloadData()
-        }
-    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -111,6 +103,25 @@ extension DashboardViewController: UICollectionViewDataSource {
             cell.configureCell(dataType: array[indexPath.row], data: stepCount)
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderCollectionReusableView.identifier, for: indexPath) as! HeaderCollectionReusableView
+        header.configure()
+        header.delegate = self
+        return header
+    }
+}
+
+
+// MARK: - HeaderCollectionReusableViewDelegate
+
+extension DashboardViewController: HeaderCollectionReusableViewDelegate {
+    func tapRefreshDataButton() {
+        getHealthData()
+        DispatchQueue.main.async { [weak self] in
+            self?.contentView.dashboardCollectionView.dataCollectionView.reloadData()
+        }
     }
 }
 

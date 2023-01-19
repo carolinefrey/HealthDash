@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B900716F297966E400B461F9 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B900716E297966E400B461F9 /* HeaderCollectionReusableView.swift */; };
 		B975C262296F6F720046044F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C261296F6F720046044F /* AppDelegate.swift */; };
 		B975C264296F6F720046044F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C263296F6F720046044F /* SceneDelegate.swift */; };
 		B975C266296F6F720046044F /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C265296F6F720046044F /* DashboardViewController.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B900716E297966E400B461F9 /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		B975C25E296F6F720046044F /* HealthDash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B975C261296F6F720046044F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B975C263296F6F720046044F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				B975C27A296F71E90046044F /* GreetingView.swift */,
 				B975C283296F75EE0046044F /* DashboardCollectionView.swift */,
 				B975C285296F76EB0046044F /* DashboardCollectionViewCell.swift */,
+				B900716E297966E400B461F9 /* HeaderCollectionReusableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B900716F297966E400B461F9 /* HeaderCollectionReusableView.swift in Sources */,
 				B9B9A5A529702DF5004719D6 /* HealthStore.swift in Sources */,
 				B975C286296F76EB0046044F /* DashboardCollectionViewCell.swift in Sources */,
 				B975C266296F6F720046044F /* DashboardViewController.swift in Sources */,

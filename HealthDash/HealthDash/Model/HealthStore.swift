@@ -166,28 +166,23 @@ class HealthStore {
             
             var timeInBed = 0.0
             if let result = results {
-//                if let sample = result.first as? HKCategorySample {
-//                    if sample.value == HKCategoryValueSleepAnalysis.inBed.rawValue && sample.startDate >= startDate {
-//                        let sleepTime = sample.endDate.timeIntervalSince(sample.startDate)
-//                        let secondsInAnHour = 3600.0
-//                        let hoursBetweenDates = sleepTime / secondsInAnHour
-//                        timeInBed += hoursBetweenDates
-//
-//                        print("startDate: \(sample.startDate), endDate: \(sample.endDate)")
-//                        print("sleepTime = \(sleepTime)")
-//                        print("hoursBetweenDates = \(hoursBetweenDates)")
-//                        print("timeInBed = \(timeInBed)\n")
-//                    }
-//                }
-                for item in result {
-                    if let sample = item as? HKCategorySample {
-                        if sample.value == HKCategoryValueSleepAnalysis.inBed.rawValue && sample.startDate >= startDate {
-                            let sleepTime = sample.endDate.timeIntervalSince(sample.startDate)
-                            timeInBed += sleepTime
-                        }
+                if let sample = result.first as? HKCategorySample {
+                    if sample.value == HKCategoryValueSleepAnalysis.inBed.rawValue && sample.startDate >= startDate {
+                        let sleepTime = sample.endDate.timeIntervalSince(sample.startDate)
+                        timeInBed += sleepTime
                     }
                 }
                 completion(timeInBed)
+                
+//                for item in result {
+//                    if let sample = item as? HKCategorySample {
+//                        if sample.value == HKCategoryValueSleepAnalysis.inBed.rawValue && sample.startDate >= startDate {
+//                            let sleepTime = sample.endDate.timeIntervalSince(sample.startDate)
+//                            timeInBed += sleepTime
+//                        }
+//                    }
+//                }
+//                completion(timeInBed)
             }
         }
 

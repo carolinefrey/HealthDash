@@ -78,22 +78,39 @@ class DashboardCollectionViewCell: UICollectionViewCell {
             let hoursFormatted = String(format: "%.0f", hours)
             let minutes = String(format: "%.0f", minutesRemaining)
             
-            dataText.text = "\(hoursFormatted) hrs \(minutes) min"
-            dataLabel.text = "in bed"
+            if data == 0 {
+                dataText.text = "no data"
+            } else {
+                dataText.text = "\(hoursFormatted) hrs \(minutes) min"
+                dataLabel.text = "in bed"
+            }
         case .weight:
             icon.image = UIImage(systemName: "figure.arms.open")
-            dataText.text = "\(data)"
-            dataLabel.text = "pounds"
+            if data == 0 {
+                dataText.text = "no data"
+            } else {
+                dataText.text = "\(data)"
+                dataLabel.text = "pounds"
+            }
         case .activeEnergy:
             icon.image = UIImage(systemName: "flame.fill")
             let formattedValue = String(format: "%.0f", data)
-            dataText.text = "\(formattedValue)"
-            dataLabel.text = "calories burned"
+            
+            if data == 0 {
+                dataText.text = "no data"
+            } else {
+                dataText.text = "\(formattedValue)"
+                dataLabel.text = "calories burned"
+            }
         case .steps:
             icon.image = UIImage(systemName: "shoeprints.fill")
             let formattedValue = String(format: "%.0f", data)
-            dataText.text = "\(formattedValue)"
-            dataLabel.text = "steps"
+            if data == 0 {
+                dataText.text = "no data"
+            } else {
+                dataText.text = "\(formattedValue)"
+                dataLabel.text = "steps"
+            }
         }
     }
 

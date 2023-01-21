@@ -30,8 +30,8 @@ class HeaderCollectionReusableView: UICollectionReusableView {
     }()
     
     lazy var refreshButton: UIButton = {
-        let config = UIImage.SymbolConfiguration(pointSize: 26)
-        let icon = UIImage(systemName: "goforward.plus", withConfiguration: config)
+        let config = UIImage.SymbolConfiguration(pointSize: 36, weight: .light)
+        let icon = UIImage(systemName: "arrow.clockwise.heart", withConfiguration: config)
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = UIColor(named: "Navy")

@@ -8,6 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		B900716F297966E400B461F9 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B900716E297966E400B461F9 /* HeaderCollectionReusableView.swift */; };
+		B920B63D298937C1005158C3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B920B63C298937C1005158C3 /* WidgetKit.framework */; };
+		B920B63F298937C1005158C3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B920B63E298937C1005158C3 /* SwiftUI.framework */; };
+		B920B642298937C1005158C3 /* HealthDashWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920B641298937C1005158C3 /* HealthDashWidget.swift */; };
+		B920B644298937C3005158C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B920B643298937C3005158C3 /* Assets.xcassets */; };
+		B920B648298937C3005158C3 /* HealthDashWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B920B63A298937C1005158C3 /* HealthDashWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B920B64D298938EB005158C3 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C265296F6F720046044F /* DashboardViewController.swift */; };
+		B920B64F2989390D005158C3 /* HealthDashWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920B64E2989390D005158C3 /* HealthDashWidgetView.swift */; };
+		B937CF1F29893E25005A8949 /* HealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B9A5A429702DF5004719D6 /* HealthStore.swift */; };
+		B937CF2029893E29005A8949 /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C287296F78E60046044F /* MainContentView.swift */; };
+		B937CF2129893E30005A8949 /* GreetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C27A296F71E90046044F /* GreetingView.swift */; };
+		B937CF2229893E32005A8949 /* DashboardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C283296F75EE0046044F /* DashboardCollectionView.swift */; };
+		B937CF2329893E3F005A8949 /* DashboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C285296F76EB0046044F /* DashboardCollectionViewCell.swift */; };
+		B937CF2429893E41005A8949 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B900716E297966E400B461F9 /* HeaderCollectionReusableView.swift */; };
+		B937CF25298940FA005A8949 /* Oxygen-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B975C27D296F75430046044F /* Oxygen-Regular.ttf */; };
+		B937CF26298940FD005A8949 /* Oxygen-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B975C27E296F75460046044F /* Oxygen-Bold.ttf */; };
+		B937CF27298940FF005A8949 /* Oxygen-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B975C27F296F75490046044F /* Oxygen-Light.ttf */; };
 		B975C262296F6F720046044F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C261296F6F720046044F /* AppDelegate.swift */; };
 		B975C264296F6F720046044F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C263296F6F720046044F /* SceneDelegate.swift */; };
 		B975C266296F6F720046044F /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C265296F6F720046044F /* DashboardViewController.swift */; };
@@ -23,8 +39,39 @@
 		B9B9A5A529702DF5004719D6 /* HealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B9A5A429702DF5004719D6 /* HealthStore.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B920B646298937C3005158C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B975C256296F6F720046044F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B920B639298937C1005158C3;
+			remoteInfo = HealthDashWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B920B649298937C3005158C3 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B920B648298937C3005158C3 /* HealthDashWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		B900716E297966E400B461F9 /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		B920B63A298937C1005158C3 /* HealthDashWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HealthDashWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B920B63C298937C1005158C3 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		B920B63E298937C1005158C3 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		B920B641298937C1005158C3 /* HealthDashWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDashWidget.swift; sourceTree = "<group>"; };
+		B920B643298937C3005158C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B920B645298937C3005158C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B920B64E2989390D005158C3 /* HealthDashWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDashWidgetView.swift; sourceTree = "<group>"; };
 		B975C25E296F6F720046044F /* HealthDash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B975C261296F6F720046044F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B975C263296F6F720046044F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +91,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B920B637298937C1005158C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B920B63F298937C1005158C3 /* SwiftUI.framework in Frameworks */,
+				B920B63D298937C1005158C3 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B975C25B296F6F720046044F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -54,10 +110,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B920B63B298937C1005158C3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B920B63C298937C1005158C3 /* WidgetKit.framework */,
+				B920B63E298937C1005158C3 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B920B640298937C1005158C3 /* HealthDashWidget */ = {
+			isa = PBXGroup;
+			children = (
+				B920B641298937C1005158C3 /* HealthDashWidget.swift */,
+				B920B64E2989390D005158C3 /* HealthDashWidgetView.swift */,
+				B920B643298937C3005158C3 /* Assets.xcassets */,
+				B920B645298937C3005158C3 /* Info.plist */,
+			);
+			path = HealthDashWidget;
+			sourceTree = "<group>";
+		};
 		B975C255296F6F720046044F = {
 			isa = PBXGroup;
 			children = (
 				B975C260296F6F720046044F /* HealthDash */,
+				B920B640298937C1005158C3 /* HealthDashWidget */,
+				B920B63B298937C1005158C3 /* Frameworks */,
 				B975C25F296F6F720046044F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				B975C25E296F6F720046044F /* HealthDash.app */,
+				B920B63A298937C1005158C3 /* HealthDashWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -136,6 +215,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B920B639298937C1005158C3 /* HealthDashWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B920B64C298937C3005158C3 /* Build configuration list for PBXNativeTarget "HealthDashWidgetExtension" */;
+			buildPhases = (
+				B920B636298937C1005158C3 /* Sources */,
+				B920B637298937C1005158C3 /* Frameworks */,
+				B920B638298937C1005158C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HealthDashWidgetExtension;
+			productName = HealthDashWidgetExtension;
+			productReference = B920B63A298937C1005158C3 /* HealthDashWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		B975C25D296F6F720046044F /* HealthDash */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B975C272296F6F730046044F /* Build configuration list for PBXNativeTarget "HealthDash" */;
@@ -143,10 +239,12 @@
 				B975C25A296F6F720046044F /* Sources */,
 				B975C25B296F6F720046044F /* Frameworks */,
 				B975C25C296F6F720046044F /* Resources */,
+				B920B649298937C3005158C3 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B920B647298937C3005158C3 /* PBXTargetDependency */,
 			);
 			name = HealthDash;
 			productName = HealthDash;
@@ -163,6 +261,9 @@
 				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
+					B920B639298937C1005158C3 = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
 					B975C25D296F6F720046044F = {
 						CreatedOnToolsVersion = 14.0.1;
 					};
@@ -182,11 +283,23 @@
 			projectRoot = "";
 			targets = (
 				B975C25D296F6F720046044F /* HealthDash */,
+				B920B639298937C1005158C3 /* HealthDashWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B920B638298937C1005158C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B937CF26298940FD005A8949 /* Oxygen-Bold.ttf in Resources */,
+				B920B644298937C3005158C3 /* Assets.xcassets in Resources */,
+				B937CF25298940FA005A8949 /* Oxygen-Regular.ttf in Resources */,
+				B937CF27298940FF005A8949 /* Oxygen-Light.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B975C25C296F6F720046044F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -202,6 +315,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B920B636298937C1005158C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B920B642298937C1005158C3 /* HealthDashWidget.swift in Sources */,
+				B937CF2429893E41005A8949 /* HeaderCollectionReusableView.swift in Sources */,
+				B937CF2329893E3F005A8949 /* DashboardCollectionViewCell.swift in Sources */,
+				B937CF2129893E30005A8949 /* GreetingView.swift in Sources */,
+				B920B64D298938EB005158C3 /* DashboardViewController.swift in Sources */,
+				B920B64F2989390D005158C3 /* HealthDashWidgetView.swift in Sources */,
+				B937CF1F29893E25005A8949 /* HealthStore.swift in Sources */,
+				B937CF2229893E32005A8949 /* DashboardCollectionView.swift in Sources */,
+				B937CF2029893E29005A8949 /* MainContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B975C25A296F6F720046044F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -220,6 +349,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		B920B647298937C3005158C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B920B639298937C1005158C3 /* HealthDashWidgetExtension */;
+			targetProxy = B920B646298937C3005158C3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		B975C26C296F6F730046044F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -232,6 +369,60 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B920B64A298937C3005158C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 794RQQKASN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HealthDashWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HealthDashWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.frey.caroline.HealthDash.HealthDashWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B920B64B298937C3005158C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 794RQQKASN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HealthDashWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HealthDashWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.frey.caroline.HealthDash.HealthDashWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		B975C270296F6F730046044F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -349,6 +540,7 @@
 		B975C273296F6F730046044F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = HealthDash/HealthDash.entitlements;
@@ -377,6 +569,7 @@
 		B975C274296F6F730046044F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = HealthDash/HealthDash.entitlements;
@@ -405,6 +598,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B920B64C298937C3005158C3 /* Build configuration list for PBXNativeTarget "HealthDashWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B920B64A298937C3005158C3 /* Debug */,
+				B920B64B298937C3005158C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B975C259296F6F720046044F /* Build configuration list for PBXProject "HealthDash" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

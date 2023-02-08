@@ -30,7 +30,7 @@ class HeaderCollectionReusableView: UICollectionReusableView {
     }()
     
     lazy var refreshButton: UIButton = {
-        let config = UIImage.SymbolConfiguration(pointSize: 36, weight: .light)
+        let config = UIImage.SymbolConfiguration(pointSize: 44, weight: .light)
         let icon = UIImage(systemName: "arrow.clockwise.heart", withConfiguration: config)
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +56,7 @@ class HeaderCollectionReusableView: UICollectionReusableView {
             headerLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             
-            refreshButton.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            refreshButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             refreshButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
         ])
     }

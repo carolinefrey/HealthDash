@@ -7,6 +7,7 @@
 
 import Foundation
 import HealthKit
+import WidgetKit
 
 class HealthStore {
     
@@ -15,6 +16,11 @@ class HealthStore {
     var activeEnergyQuery: HKStatisticsQuery?
     var weightQuery: HKSampleQuery?
     var sleepQuery: HKSampleQuery?
+    
+    var stepCount = 0.0
+    var weight = 0.0
+    var sleepDuration = 0.0
+    var activeEnergy = 0.0
     
     init() {
         if HKHealthStore.isHealthDataAvailable() {
@@ -189,5 +195,32 @@ class HealthStore {
         if let healthStore = healthStore, let query = self.sleepQuery {
             healthStore.execute(query)
         }
+    }
+    
+    func getHealthData() {
+        calculateSteps { steps in
+            if steps > 0 {
+                self.stepCount = steps
+            }
+        }
+        
+        retrieveWeight { weight in
+            if weight > 0 {
+                self.weight = weight
+            }
+        }
+        
+        calculateActiveEnergy { calories in
+            if calories > 0 {
+                self.activeEnergy = calories
+            }
+        }
+        
+        calculateSleep { duration in
+            if duration > 0 {
+                self.sleepDuration = duration
+            }
+        }
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }

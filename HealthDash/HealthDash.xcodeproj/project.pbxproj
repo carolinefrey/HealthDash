@@ -72,6 +72,7 @@
 		B920B643298937C3005158C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B920B645298937C3005158C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B920B64E2989390D005158C3 /* HealthDashWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDashWidgetView.swift; sourceTree = "<group>"; };
+		B9567564299328980059F523 /* HealthDashWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthDashWidgetExtension.entitlements; sourceTree = "<group>"; };
 		B975C25E296F6F720046044F /* HealthDash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B975C261296F6F720046044F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B975C263296F6F720046044F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +134,7 @@
 		B975C255296F6F720046044F = {
 			isa = PBXGroup;
 			children = (
+				B9567564299328980059F523 /* HealthDashWidgetExtension.entitlements */,
 				B975C260296F6F720046044F /* HealthDash */,
 				B920B640298937C1005158C3 /* HealthDashWidget */,
 				B920B63B298937C1005158C3 /* Frameworks */,
@@ -374,6 +376,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = HealthDashWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 794RQQKASN;
@@ -401,6 +404,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = HealthDashWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 794RQQKASN;
@@ -549,10 +553,13 @@
 				DEVELOPMENT_TEAM = 794RQQKASN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HealthDash/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "This app requires access to your health data so that it can be displayed on your HealthDash.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This app requires update access to your health data so that you can input your weight directly from HealthDash.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -578,10 +585,13 @@
 				DEVELOPMENT_TEAM = 794RQQKASN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HealthDash/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "This app requires access to your health data so that it can be displayed on your HealthDash.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This app requires update access to your health data so that you can input your weight directly from HealthDash.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

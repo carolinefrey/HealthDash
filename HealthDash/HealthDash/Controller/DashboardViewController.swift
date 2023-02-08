@@ -7,14 +7,11 @@
 
 import UIKit
 import HealthKit
+import WidgetKit
 
 class DashboardViewController: UIViewController {
     
-    private var healthStore: HealthStore?
-    var stepCount = 0.0
-    var weight = 0.0
-    var sleepDuration = 0.0
-    var activeEnergy = 0.0
+    var healthStore: HealthStore?
 
     // MARK: - UI Properties
     
@@ -27,6 +24,8 @@ class DashboardViewController: UIViewController {
 
         contentView = MainContentView()
         view = contentView
+        
+        WidgetCenter.shared.reloadAllTimelines()
         
         configureCollectionView()
         contentView.greetingView.configureGreeting()
@@ -42,38 +41,13 @@ class DashboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     // MARK: - Functions
     
     private func configureCollectionView() {
         contentView.dashboardCollectionView.dataCollectionView.dataSource = self
-    }
-    
-    func getHealthData() {
-        healthStore?.calculateSteps { steps in
-            if steps > 0 {
-                self.stepCount = steps
-            }
-        }
-        
-        healthStore?.retrieveWeight { weight in
-            if weight > 0 {
-                self.weight = weight
-            }
-        }
-        
-        healthStore?.calculateActiveEnergy { calories in
-            if calories > 0 {
-                self.activeEnergy = calories
-            }
-        }
-        
-        healthStore?.calculateSleep { duration in
-            if duration > 0 {
-                self.sleepDuration = duration
-            }
-        }
     }
 }
 
@@ -94,13 +68,13 @@ extension DashboardViewController: UICollectionViewDataSource {
         
         switch array[indexPath.row] {
         case .sleep:
-            cell.configureCell(dataType: array[indexPath.row], data: sleepDuration)
+            cell.configureCell(dataType: array[indexPath.row], data: healthStore?.sleepDuration ?? 0.0)
         case .weight:
-            cell.configureCell(dataType: array[indexPath.row], data: weight)
+            cell.configureCell(dataType: array[indexPath.row], data: healthStore?.weight ?? 0.0)
         case .activeEnergy:
-            cell.configureCell(dataType: array[indexPath.row], data: activeEnergy)
+            cell.configureCell(dataType: array[indexPath.row], data: healthStore?.activeEnergy ?? 0.0)
         case .steps:
-            cell.configureCell(dataType: array[indexPath.row], data: stepCount)
+            cell.configureCell(dataType: array[indexPath.row], data: healthStore?.stepCount ?? 0.0)
         }
         return cell
     }
@@ -118,9 +92,25 @@ extension DashboardViewController: UICollectionViewDataSource {
 
 extension DashboardViewController: HeaderCollectionReusableViewDelegate {
     func tapRefreshDataButton() {
-        getHealthData()
+        
+        let userDefaults = UserDefaults(suiteName: "group.healthDashWidgetCache")
+        
+        healthStore?.getHealthData()
+        
+        let sleep = healthStore?.sleepDuration
+        let weight = healthStore?.weight
+        let activeEnergy = healthStore?.activeEnergy
+        let steps = healthStore?.stepCount
+        
+        //send data to shared app group (so widget can access)
+        userDefaults?.setValue(sleep, forKey: "sleep")
+        userDefaults?.setValue(weight, forKey: "weight")
+        userDefaults?.setValue(activeEnergy, forKey: "activeEnergy")
+        userDefaults?.setValue(steps, forKey: "steps")
+        
         DispatchQueue.main.async { [weak self] in
             self?.contentView.dashboardCollectionView.dataCollectionView.reloadData()
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 }

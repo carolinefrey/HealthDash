@@ -2,14 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleDarkContent</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>This app requires update access to your health data so that you can input your weight directly from HealthDash.</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>This app requires access to your health data so that it can be displayed on your HealthDash.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Oxygen-Regular.ttf</string>
@@ -33,5 +25,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

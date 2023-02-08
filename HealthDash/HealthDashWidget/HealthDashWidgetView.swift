@@ -7,13 +7,15 @@
 
 import SwiftUI
 
+//TODO: - Move this file to trash (view is built in HealthDashWidget.swift)
+//  it is simple enough, doesn't need its own file
+
 struct CustomColors {
-    static let navy = Color("Navy")
     static let background = Color("WidgetBackground")
 }
 
 struct HealthDashWidgetView: View {
-    let data: DashboardViewController
+    let data: HealthStore
     
     var body: some View {
         ZStack {
@@ -22,40 +24,40 @@ struct HealthDashWidgetView: View {
                 HStack {
                     Text("Weight: ")
                         .font(.headline)
-                        .foregroundColor(CustomColors.navy)
+                        .foregroundColor(.white)
                         .font(Font.custom("Oxygen-Regular", size: 24))
                     + Text("\(data.weight)")
                         .font(.body)
-                        .foregroundColor(CustomColors.navy)
+                        .foregroundColor(.white)
                         .font(Font.custom("Oxygen-Regular", size: 12))
                     
                     Text("Steps: ")
                         .font(.headline)
-                        .foregroundColor(CustomColors.navy)
+                        .foregroundColor(.white)
                         .font(Font.custom("Oxygen-Regular", size: 24))
                     + Text("\(data.stepCount)")
                         .font(.body)
-                        .foregroundColor(CustomColors.navy)
+                        .foregroundColor(.white)
                         .font(Font.custom("Oxygen-Regular", size: 12))
                 }
     
                 HStack {
                     Text("Sleep: ")
                         .font(.headline)
-                        .foregroundColor(CustomColors.navy)
+                        .foregroundColor(.white)
                         .font(Font.custom("Oxygen-Regular", size: 24))
                     + Text("\(data.sleepDuration)")
                         .font(.body)
-                        .foregroundColor(CustomColors.navy)
+                        .foregroundColor(.white)
                         .font(Font.custom("Oxygen-Regular", size: 12))
                     
                     Text("Calories: ")
                         .font(.headline)
-                        .foregroundColor(CustomColors.navy)
+                        .foregroundColor(.white)
                         .font(Font.custom("Oxygen-Regular", size: 24))
                     + Text("\(data.activeEnergy)")
                         .font(.body)
-                        .foregroundColor(CustomColors.navy)
+                        .foregroundColor(.white)
                         .font(Font.custom("Oxygen-Regular", size: 12))
                 }
             }

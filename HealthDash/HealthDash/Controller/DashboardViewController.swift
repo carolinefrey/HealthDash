@@ -36,8 +36,6 @@ class DashboardViewController: UIViewController {
         contentView = MainContentView()
         view = contentView
         
-        WidgetCenter.shared.reloadAllTimelines()
-        
         configureCollectionView()
         contentView.greetingView.configureGreeting()
                 
@@ -52,7 +50,6 @@ class DashboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        WidgetCenter.shared.reloadAllTimelines()
     }
     
     // MARK: - Functions
@@ -86,12 +83,16 @@ extension DashboardViewController: UICollectionViewDataSource {
         switch array[indexPath.row] {
         case .sleep:
             cell.configureCell(dataType: array[indexPath.row], data: healthStore?.sleepDuration ?? 0.0)
+            cell.configureProgressBars(dataType: array[indexPath.row], data: healthStore?.sleepDuration ?? 0.0)
         case .weight:
             cell.configureCell(dataType: array[indexPath.row], data: healthStore?.weight ?? 0.0)
+            cell.configureProgressBars(dataType: array[indexPath.row], data: healthStore?.weight ?? 0.0)
         case .activeEnergy:
             cell.configureCell(dataType: array[indexPath.row], data: healthStore?.activeEnergy ?? 0.0)
+            cell.configureProgressBars(dataType: array[indexPath.row], data: healthStore?.activeEnergy ?? 0.0)
         case .steps:
             cell.configureCell(dataType: array[indexPath.row], data: healthStore?.stepCount ?? 0.0)
+            cell.configureProgressBars(dataType: array[indexPath.row], data: healthStore?.stepCount ?? 0.0)
         }
         return cell
     }
@@ -134,9 +135,9 @@ extension DashboardViewController: HeaderCollectionReusableViewDelegate {
 // MARK: - SetTargetsDelegate
 
 extension DashboardViewController: SetTargetsDelegate {
-    func didUpdateTargets(targetSleep: String) {
+    func didUpdateTargets(targetSleep: Double, targetWeight: Double, targetCalories: Double, targetSteps: Double) {
         //TODO: - Update progress bars in Dashboard
-        
+        contentView.dashboardCollectionView.dataCollectionView.reloadData()
         //TODO: - Update progress bars in Widget, reload widget
     }
 }

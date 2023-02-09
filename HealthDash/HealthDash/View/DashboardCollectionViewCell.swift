@@ -17,6 +17,8 @@ class DashboardCollectionViewCell: UICollectionViewCell {
     
     static let dashboardCollectionViewCellIdentifier = "DashboardCollectionViewCell"
     
+    let userDefaults = UserDefaults(suiteName: "group.healthDashWidgetCache")
+    
     let backgroundCell: UIView = {
         let cell = UIView()
         cell.translatesAutoresizingMaskIntoConstraints = false
@@ -52,6 +54,14 @@ class DashboardCollectionViewCell: UICollectionViewCell {
         return text
     }()
     
+    let progressBar: UIProgressView = {
+        let bar = UIProgressView()
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.trackTintColor = .red
+        bar.tintColor = .green
+        return bar
+    }()
+    
     // MARK: - Initializers
     
     override init(frame: CGRect) {
@@ -84,6 +94,7 @@ class DashboardCollectionViewCell: UICollectionViewCell {
                 dataText.text = "\(hoursFormatted) hrs \(minutes) min"
                 dataLabel.text = "in bed"
             }
+            configureProgressBars(dataType: .sleep, data: data)
         case .weight:
             icon.image = UIImage(systemName: "figure.arms.open")
             if data == 0 {
@@ -92,6 +103,7 @@ class DashboardCollectionViewCell: UICollectionViewCell {
                 dataText.text = "\(data)"
                 dataLabel.text = "pounds"
             }
+            configureProgressBars(dataType: .weight, data: data)
         case .activeEnergy:
             icon.image = UIImage(systemName: "flame.fill")
             let formattedValue = String(format: "%.0f", data)
@@ -102,6 +114,7 @@ class DashboardCollectionViewCell: UICollectionViewCell {
                 dataText.text = "\(formattedValue)"
                 dataLabel.text = "calories burned"
             }
+            configureProgressBars(dataType: .activeEnergy, data: data)
         case .steps:
             icon.image = UIImage(systemName: "shoeprints.fill")
             let formattedValue = String(format: "%.0f", data)
@@ -111,7 +124,26 @@ class DashboardCollectionViewCell: UICollectionViewCell {
                 dataText.text = "\(formattedValue)"
                 dataLabel.text = "steps"
             }
+            configureProgressBars(dataType: .steps, data: data)
         }
+    }
+
+    func configureProgressBars(dataType: Data, data: Double) {
+        var target = 0.0
+        
+        switch dataType {
+        case .sleep:
+            target = Double(userDefaults?.double(forKey: "targetSleep") ?? 0.0)
+        case .weight:
+            target = Double(userDefaults?.double(forKey: "targetWeight") ?? 0.0)
+        case .activeEnergy:
+            target = Double(userDefaults?.double(forKey: "targetCalories") ?? 0.0)
+        case .steps:
+            target = Double(userDefaults?.double(forKey: "targetSteps") ?? 0.0)
+        }
+        
+        let progress = Float(data / target)
+        progressBar.setProgress(progress, animated: false)
     }
 
     
@@ -122,6 +154,7 @@ class DashboardCollectionViewCell: UICollectionViewCell {
         addSubview(icon)
         addSubview(dataText)
         addSubview(dataLabel)
+        addSubview(progressBar)
         
         NSLayoutConstraint.activate([
             backgroundCell.topAnchor.constraint(equalTo: topAnchor),
@@ -141,6 +174,11 @@ class DashboardCollectionViewCell: UICollectionViewCell {
             
             dataLabel.centerXAnchor.constraint(equalTo: backgroundCell.centerXAnchor),
             dataLabel.topAnchor.constraint(equalTo: dataText.bottomAnchor),
+            
+            progressBar.centerXAnchor.constraint(equalTo: backgroundCell.centerXAnchor),
+            progressBar.topAnchor.constraint(equalTo: dataLabel.bottomAnchor, constant: 20),
+            progressBar.leadingAnchor.constraint(equalTo: backgroundCell.leadingAnchor, constant: 10),
+            progressBar.trailingAnchor.constraint(equalTo: backgroundCell.trailingAnchor, constant: -10)
         ])
     }
 }

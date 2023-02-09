@@ -24,6 +24,10 @@
 		B937CF25298940FA005A8949 /* Oxygen-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B975C27D296F75430046044F /* Oxygen-Regular.ttf */; };
 		B937CF26298940FD005A8949 /* Oxygen-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B975C27E296F75460046044F /* Oxygen-Bold.ttf */; };
 		B937CF27298940FF005A8949 /* Oxygen-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B975C27F296F75490046044F /* Oxygen-Light.ttf */; };
+		B93893CA2993C622009E28FD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93893C92993C622009E28FD /* SettingsViewController.swift */; };
+		B93893CB2993C628009E28FD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93893C92993C622009E28FD /* SettingsViewController.swift */; };
+		B93893CD2993C8CA009E28FD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93893CC2993C8CA009E28FD /* SettingsView.swift */; };
+		B93893CE2993CB61009E28FD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93893CC2993C8CA009E28FD /* SettingsView.swift */; };
 		B975C262296F6F720046044F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C261296F6F720046044F /* AppDelegate.swift */; };
 		B975C264296F6F720046044F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C263296F6F720046044F /* SceneDelegate.swift */; };
 		B975C266296F6F720046044F /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C265296F6F720046044F /* DashboardViewController.swift */; };
@@ -72,6 +76,8 @@
 		B920B643298937C3005158C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B920B645298937C3005158C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B920B64E2989390D005158C3 /* HealthDashWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDashWidgetView.swift; sourceTree = "<group>"; };
+		B93893C92993C622009E28FD /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B93893CC2993C8CA009E28FD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B9567564299328980059F523 /* HealthDashWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthDashWidgetExtension.entitlements; sourceTree = "<group>"; };
 		B975C25E296F6F720046044F /* HealthDash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B975C261296F6F720046044F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -175,6 +181,7 @@
 				B975C283296F75EE0046044F /* DashboardCollectionView.swift */,
 				B975C285296F76EB0046044F /* DashboardCollectionViewCell.swift */,
 				B900716E297966E400B461F9 /* HeaderCollectionReusableView.swift */,
+				B93893CC2993C8CA009E28FD /* SettingsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -191,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				B975C265296F6F720046044F /* DashboardViewController.swift */,
+				B93893C92993C622009E28FD /* SettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -324,12 +332,14 @@
 				B920B642298937C1005158C3 /* HealthDashWidget.swift in Sources */,
 				B937CF2429893E41005A8949 /* HeaderCollectionReusableView.swift in Sources */,
 				B937CF2329893E3F005A8949 /* DashboardCollectionViewCell.swift in Sources */,
+				B93893CB2993C628009E28FD /* SettingsViewController.swift in Sources */,
 				B937CF2129893E30005A8949 /* GreetingView.swift in Sources */,
 				B920B64D298938EB005158C3 /* DashboardViewController.swift in Sources */,
 				B920B64F2989390D005158C3 /* HealthDashWidgetView.swift in Sources */,
 				B937CF1F29893E25005A8949 /* HealthStore.swift in Sources */,
 				B937CF2229893E32005A8949 /* DashboardCollectionView.swift in Sources */,
 				B937CF2029893E29005A8949 /* MainContentView.swift in Sources */,
+				B93893CE2993CB61009E28FD /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,12 +350,14 @@
 				B900716F297966E400B461F9 /* HeaderCollectionReusableView.swift in Sources */,
 				B9B9A5A529702DF5004719D6 /* HealthStore.swift in Sources */,
 				B975C286296F76EB0046044F /* DashboardCollectionViewCell.swift in Sources */,
+				B93893CA2993C622009E28FD /* SettingsViewController.swift in Sources */,
 				B975C266296F6F720046044F /* DashboardViewController.swift in Sources */,
 				B975C27B296F71E90046044F /* GreetingView.swift in Sources */,
 				B975C284296F75EE0046044F /* DashboardCollectionView.swift in Sources */,
 				B975C262296F6F720046044F /* AppDelegate.swift in Sources */,
 				B975C288296F78E60046044F /* MainContentView.swift in Sources */,
 				B975C264296F6F720046044F /* SceneDelegate.swift in Sources */,
+				B93893CD2993C8CA009E28FD /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

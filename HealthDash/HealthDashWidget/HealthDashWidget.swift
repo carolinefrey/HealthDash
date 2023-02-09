@@ -84,8 +84,7 @@ struct HealthDashWidgetEntryView : View {
                         Image(systemName: "bed.double.fill")
                             .font(.system(size: 32))
                         Text("\(hoursFormatted) hrs \(minutes) min")
-                            .font(.body)
-                            .font(Font.custom("Oxygen-Regular", size: 18))
+                            .font(Font.custom("Oxygen-Regular", size: 20))
                     }
                     
                     Spacer()
@@ -94,8 +93,7 @@ struct HealthDashWidgetEntryView : View {
                         Image(systemName: "flame.fill")
                             .font(.system(size: 32))
                         Text("\(activeEnergyFormatted) cals")
-                            .font(.body)
-                            .font(Font.custom("Oxygen-Regular", size: 18))
+                            .font(Font.custom("Oxygen-Regular", size: 20))
                     }
                     
                     Spacer()
@@ -108,8 +106,7 @@ struct HealthDashWidgetEntryView : View {
                         Image(systemName: "figure.arms.open")
                             .font(.system(size: 32))
                         Text("\(weightFormatted) lbs")
-                            .font(.body)
-                            .font(Font.custom("Oxygen-Regular", size: 18))
+                            .font(Font.custom("Oxygen-Regular", size: 20))
                     }
                     
                     Spacer()
@@ -118,8 +115,7 @@ struct HealthDashWidgetEntryView : View {
                         Image(systemName: "shoeprints.fill")
                             .font(.system(size: 32))
                         Text("\(stepsFormatted) steps")
-                            .font(.body)
-                            .font(Font.custom("Oxygen-Regular", size: 18))
+                            .font(Font.custom("Oxygen-Regular", size: 20))
                     }
                     
                     Spacer()

@@ -12,15 +12,26 @@ import WidgetKit
 class DashboardViewController: UIViewController {
     
     var healthStore: HealthStore?
+    
+    let userDefaults = UserDefaults(suiteName: "group.healthDashWidgetCache")
 
     // MARK: - UI Properties
     
     private var contentView: MainContentView!
     
+    lazy var settingsButton: UIBarButtonItem = {
+        let config = UIImage.SymbolConfiguration(textStyle: .title3)
+        let icon = UIImage(systemName: "gear", withConfiguration: config)
+        let button = UIBarButtonItem(image: icon, style: .plain, target: self, action: #selector(presentSettingsView))
+        button.tintColor = UIColor(named: "Navy")
+        return button
+    }()
+    
     // MARK: - Lifecycle
 
     override func loadView() {
         super.loadView()
+        navigationItem.rightBarButtonItem = settingsButton
 
         contentView = MainContentView()
         view = contentView
@@ -48,6 +59,12 @@ class DashboardViewController: UIViewController {
     
     private func configureCollectionView() {
         contentView.dashboardCollectionView.dataCollectionView.dataSource = self
+    }
+    
+    @objc func presentSettingsView() {
+        let settingsVC = SettingsViewController()
+        settingsVC.delegate = self
+        present(settingsVC, animated: true)
     }
 }
 
@@ -87,7 +104,6 @@ extension DashboardViewController: UICollectionViewDataSource {
     }
 }
 
-
 // MARK: - HeaderCollectionReusableViewDelegate
 
 extension DashboardViewController: HeaderCollectionReusableViewDelegate {
@@ -115,3 +131,12 @@ extension DashboardViewController: HeaderCollectionReusableViewDelegate {
     }
 }
 
+// MARK: - SetTargetsDelegate
+
+extension DashboardViewController: SetTargetsDelegate {
+    func didUpdateTargets(targetSleep: String) {
+        //TODO: - Update progress bars in Dashboard
+        
+        //TODO: - Update progress bars in Widget, reload widget
+    }
+}

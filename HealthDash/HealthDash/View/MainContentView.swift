@@ -7,16 +7,22 @@
 
 import UIKit
 
+protocol PresentSettingsViewDelegate: AnyObject {
+    func presentSettingsView()
+}
+
 class MainContentView: UIView {
 
     // MARK: - UI Properties
+    
+    weak var delegate: PresentSettingsViewDelegate?
     
     let greetingView: GreetingView = {
         let view = GreetingView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
     let dashboardCollectionView: DashboardCollectionView = {
         let collection = DashboardCollectionView()
         collection.translatesAutoresizingMaskIntoConstraints = false
@@ -35,6 +41,12 @@ class MainContentView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Functions
+    
+    @objc func presentSettingsView() {
+        delegate?.presentSettingsView()
     }
     
     // MARK: - UI Setup

@@ -23,7 +23,7 @@ class DashboardCollectionView: UIView {
         collection.register(DashboardCollectionViewCell.self, forCellWithReuseIdentifier: DashboardCollectionViewCell.dashboardCollectionViewCellIdentifier)
         collection.register(HeaderCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderCollectionReusableView.identifier)
         collection.layer.cornerRadius = 20
-        collection.backgroundColor = UIColor(named: "CollectionViewBackground")
+        collection.backgroundColor = UIColor(named: "DarkerBackground")
         return collection
     }()
     

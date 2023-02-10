@@ -9,6 +9,13 @@ import UIKit
 import HealthKit
 import WidgetKit
 
+enum UserDefaultsKey: String {
+    case sleep = "sleep"
+    case weight = "weight"
+    case activeEnergy = "activeEnergy"
+    case steps = "steps"
+}
+
 class DashboardViewController: UIViewController {
     
     var healthStore: HealthStore?
@@ -50,6 +57,25 @@ class DashboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let userDefaults = UserDefaults(suiteName: "group.healthDashWidgetCache")
+        
+        healthStore?.getHealthData()
+        
+        let sleep = healthStore?.sleepDuration
+        let weight = healthStore?.weight
+        let activeEnergy = healthStore?.activeEnergy
+        let steps = healthStore?.stepCount
+        
+        //send data to shared app group (so widget can access)
+        userDefaults?.setValue(sleep, forKey: "sleep")
+        userDefaults?.setValue(weight, forKey: "weight")
+        userDefaults?.setValue(activeEnergy, forKey: "activeEnergy")
+        userDefaults?.setValue(steps, forKey: "steps")
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.contentView.dashboardCollectionView.dataCollectionView.reloadData()
+            WidgetCenter.shared.reloadAllTimelines()
+        }
     }
     
     // MARK: - Functions
@@ -120,10 +146,10 @@ extension DashboardViewController: HeaderCollectionReusableViewDelegate {
         let steps = healthStore?.stepCount
         
         //send data to shared app group (so widget can access)
-        userDefaults?.setValue(sleep, forKey: "sleep")
-        userDefaults?.setValue(weight, forKey: "weight")
-        userDefaults?.setValue(activeEnergy, forKey: "activeEnergy")
-        userDefaults?.setValue(steps, forKey: "steps")
+        userDefaults?.setValue(sleep, forKey: UserDefaultsKey.sleep.rawValue)
+        userDefaults?.setValue(weight, forKey: UserDefaultsKey.weight.rawValue)
+        userDefaults?.setValue(activeEnergy, forKey: UserDefaultsKey.activeEnergy.rawValue)
+        userDefaults?.setValue(steps, forKey: UserDefaultsKey.steps.rawValue)
         
         DispatchQueue.main.async { [weak self] in
             self?.contentView.dashboardCollectionView.dataCollectionView.reloadData()
@@ -136,8 +162,7 @@ extension DashboardViewController: HeaderCollectionReusableViewDelegate {
 
 extension DashboardViewController: SetTargetsDelegate {
     func didUpdateTargets(targetSleep: Double, targetWeight: Double, targetCalories: Double, targetSteps: Double) {
-        //TODO: - Update progress bars in Dashboard
         contentView.dashboardCollectionView.dataCollectionView.reloadData()
-        //TODO: - Update progress bars in Widget, reload widget
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }

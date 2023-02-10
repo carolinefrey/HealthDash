@@ -11,12 +11,12 @@ import SwiftUI
 struct Provider: TimelineProvider {
     //placeholder widget, used to display preview (should make func that fetches dummy data here)
     func placeholder(in context: Context) -> DashboardEntry {
-        DashboardEntry(date: Date(), sleep: 0.0, weight: 0.0, activeEnergy: 0.0, steps: 0.0)
+        DashboardEntry(date: Date(), sleep: 30600, weight: 125.0, activeEnergy: 432, steps: 5698)
     }
     
     //snapshot of what the widget looks like right now, can use same dummy data as above (I think?)
     func getSnapshot(in context: Context, completion: @escaping (DashboardEntry) -> ()) {
-        let entry = DashboardEntry(date: Date(), sleep: 0.0, weight: 0.0, activeEnergy: 0.0, steps: 0.0)
+        let entry = DashboardEntry(date: Date(), sleep: 30600, weight: 125.0, activeEnergy: 432, steps: 5698)
         completion(entry)
     }
     
@@ -29,9 +29,9 @@ struct Provider: TimelineProvider {
         let activeEnergy = userDefaults?.value(forKey: "activeEnergy") as? Double ?? 0.0
         let steps = userDefaults?.value(forKey: "steps") as? Double ?? 0.0
         
-        //         Generate a timeline consisting of five entries an hour apart, starting from the current date.
+        //Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
+        for hourOffset in 0..<5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
             let entry = DashboardEntry(date: entryDate,
                                        sleep: sleep,
@@ -73,52 +73,111 @@ struct HealthDashWidgetEntryView : View {
         let activeEnergyFormatted = String(format: "%.0f", entry.activeEnergy)
         let stepsFormatted = String(format: "%.0f", entry.steps)
         
+        //retrieve targets
+        let userDefaults = UserDefaults(suiteName: "group.healthDashWidgetCache")
+        let sleepTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.sleep.rawValue) ?? 0.0)
+        let weightTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.weight.rawValue) ?? 0.0)
+        let calorieTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.activeEnergy.rawValue) ?? 0.0)
+        let stepTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.steps.rawValue) ?? 0.0)
+        
         ZStack {
             Color(UIColor(named: "WidgetBackground")!)
-            HStack(spacing: 30) {
-                
-                VStack(alignment: .leading) {
-                    Spacer()
-                    
-                    HStack {
-                        Image(systemName: "bed.double.fill")
-                            .font(.system(size: 32))
-                        Text("\(hoursFormatted) hrs \(minutes) min")
-                            .font(Font.custom("Oxygen-Regular", size: 20))
+            
+            HStack(spacing: -50) {
+                VStack(alignment: .leading, spacing: 30) {
+                    VStack {
+                        HStack {
+                            Image(systemName: "bed.double.fill")
+                                .font(.system(size: 18))
+                                .foregroundColor(Color("TextColor"))
+                            Text("\(hoursFormatted) hrs \(minutes) min")
+                                .font(Font.custom("Oxygen-Regular", size: 18))
+                                .foregroundColor(Color("TextColor"))
+                        }
+                        HStack(spacing: -20) {
+                            ProgressView(value: hours, total: sleepTarget)
+                                .progressViewStyle(LinearProgressViewStyle(tint: (Color("TextColor"))))
+                                .scaleEffect(x: 0.5, y: 0.8, anchor: .center)
+                            if entry.sleep >= sleepTarget {
+                                Image(systemName: "checkmark.circle")
+                                    .resizable().frame(width: 15, height: 15)
+                            } else {
+                                EmptyView()
+                            }
+                        }
+                        .padding([.leading, .trailing], 30)
                     }
                     
-                    Spacer()
-                    
-                    HStack {
-                        Image(systemName: "flame.fill")
-                            .font(.system(size: 32))
-                        Text("\(activeEnergyFormatted) cals")
-                            .font(Font.custom("Oxygen-Regular", size: 20))
+                    VStack {
+                        HStack {
+                            Image(systemName: "flame.fill")
+                                .font(.system(size: 18))
+                                .foregroundColor(Color("TextColor"))
+                            Text("\(activeEnergyFormatted) cals")
+                                .font(Font.custom("Oxygen-Regular", size: 18))
+                                .foregroundColor(Color("TextColor"))
+                        }
+                        HStack(spacing: -20) {
+                            ProgressView(value: entry.activeEnergy, total: calorieTarget)
+                                .progressViewStyle(LinearProgressViewStyle(tint: (Color("TextColor"))))
+                                .scaleEffect(x: 0.5, y: 0.8, anchor: .center)
+                            if entry.activeEnergy >= calorieTarget {
+                                Image(systemName: "checkmark.circle")
+                                    .resizable().frame(width: 15, height: 15)
+                            } else {
+                                EmptyView()
+                            }
+                        }
+                        .padding([.leading, .trailing], 30)
                     }
-                    
-                    Spacer()
                 }
-
-                VStack(alignment: .leading) {
-                    Spacer()
-                    
-                    HStack {
-                        Image(systemName: "figure.arms.open")
-                            .font(.system(size: 32))
-                        Text("\(weightFormatted) lbs")
-                            .font(Font.custom("Oxygen-Regular", size: 20))
+                
+                VStack(alignment: .leading, spacing: 30) {
+                    VStack {
+                        HStack {
+                            Image(systemName: "figure.arms.open")
+                                .font(.system(size: 18))
+                                .foregroundColor(Color("TextColor"))
+                            Text("\(weightFormatted) lbs")
+                                .font(Font.custom("Oxygen-Regular", size: 18))
+                                .foregroundColor(Color("TextColor"))
+                        }
+                        HStack(spacing: -20) {
+                            ProgressView(value: entry.weight, total: weightTarget)
+                                .progressViewStyle(LinearProgressViewStyle(tint: (Color("TextColor"))))
+                                .scaleEffect(x: 0.5, y: 0.8, anchor: .center)
+                            if entry.weight >= weightTarget {
+                                Image(systemName: "checkmark.circle")
+                                    .resizable().frame(width: 15, height: 15)
+                            } else {
+                                EmptyView()
+                            }
+                        }
+                        .padding([.leading, .trailing], 30)
                     }
                     
-                    Spacer()
-                    
-                    HStack {
-                        Image(systemName: "shoeprints.fill")
-                            .font(.system(size: 32))
-                        Text("\(stepsFormatted) steps")
-                            .font(Font.custom("Oxygen-Regular", size: 20))
+                    VStack {
+                        HStack {
+                            Image(systemName: "shoeprints.fill")
+                                .font(.system(size: 18))
+                                .foregroundColor(Color("TextColor"))
+                            Text("\(stepsFormatted) steps")
+                                .font(Font.custom("Oxygen-Regular", size: 18))
+                                .foregroundColor(Color("TextColor"))
+                        }
+                        HStack(spacing: -20) {
+                            ProgressView(value: entry.steps, total: stepTarget)
+                                .progressViewStyle(LinearProgressViewStyle(tint: (Color("TextColor"))))
+                                .scaleEffect(x: 0.5, y: 0.8, anchor: .center)
+                            if entry.steps >= stepTarget {
+                                Image(systemName: "checkmark.circle")
+                                    .resizable().frame(width: 15, height: 15)
+                            } else {
+                                EmptyView()
+                            }
+                        }
+                        .padding([.leading, .trailing], 30)
                     }
-                    
-                    Spacer()
                 }
             }
         }

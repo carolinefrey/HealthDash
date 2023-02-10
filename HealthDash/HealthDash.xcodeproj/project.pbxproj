@@ -14,7 +14,6 @@
 		B920B644298937C3005158C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B920B643298937C3005158C3 /* Assets.xcassets */; };
 		B920B648298937C3005158C3 /* HealthDashWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B920B63A298937C1005158C3 /* HealthDashWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B920B64D298938EB005158C3 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C265296F6F720046044F /* DashboardViewController.swift */; };
-		B920B64F2989390D005158C3 /* HealthDashWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920B64E2989390D005158C3 /* HealthDashWidgetView.swift */; };
 		B937CF1F29893E25005A8949 /* HealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B9A5A429702DF5004719D6 /* HealthStore.swift */; };
 		B937CF2029893E29005A8949 /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C287296F78E60046044F /* MainContentView.swift */; };
 		B937CF2129893E30005A8949 /* GreetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C27A296F71E90046044F /* GreetingView.swift */; };
@@ -75,7 +74,6 @@
 		B920B641298937C1005158C3 /* HealthDashWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDashWidget.swift; sourceTree = "<group>"; };
 		B920B643298937C3005158C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B920B645298937C3005158C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B920B64E2989390D005158C3 /* HealthDashWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDashWidgetView.swift; sourceTree = "<group>"; };
 		B93893C92993C622009E28FD /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B93893CC2993C8CA009E28FD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B9567564299328980059F523 /* HealthDashWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthDashWidgetExtension.entitlements; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				B920B641298937C1005158C3 /* HealthDashWidget.swift */,
-				B920B64E2989390D005158C3 /* HealthDashWidgetView.swift */,
 				B920B643298937C3005158C3 /* Assets.xcassets */,
 				B920B645298937C3005158C3 /* Info.plist */,
 			);
@@ -335,7 +332,6 @@
 				B93893CB2993C628009E28FD /* SettingsViewController.swift in Sources */,
 				B937CF2129893E30005A8949 /* GreetingView.swift in Sources */,
 				B920B64D298938EB005158C3 /* DashboardViewController.swift in Sources */,
-				B920B64F2989390D005158C3 /* HealthDashWidgetView.swift in Sources */,
 				B937CF1F29893E25005A8949 /* HealthStore.swift in Sources */,
 				B937CF2229893E32005A8949 /* DashboardCollectionView.swift in Sources */,
 				B937CF2029893E29005A8949 /* MainContentView.swift in Sources */,

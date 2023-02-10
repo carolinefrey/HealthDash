@@ -57,8 +57,7 @@ class DashboardCollectionViewCell: UICollectionViewCell {
     let progressBar: UIProgressView = {
         let bar = UIProgressView()
         bar.translatesAutoresizingMaskIntoConstraints = false
-        bar.trackTintColor = .red
-        bar.tintColor = .green
+        bar.tintColor = UIColor(named: "Navy")
         return bar
     }()
     
@@ -124,7 +123,6 @@ class DashboardCollectionViewCell: UICollectionViewCell {
                 dataText.text = "\(formattedValue)"
                 dataLabel.text = "steps"
             }
-            configureProgressBars(dataType: .steps, data: data)
         }
     }
 
@@ -177,8 +175,8 @@ class DashboardCollectionViewCell: UICollectionViewCell {
             
             progressBar.centerXAnchor.constraint(equalTo: backgroundCell.centerXAnchor),
             progressBar.topAnchor.constraint(equalTo: dataLabel.bottomAnchor, constant: 20),
-            progressBar.leadingAnchor.constraint(equalTo: backgroundCell.leadingAnchor, constant: 10),
-            progressBar.trailingAnchor.constraint(equalTo: backgroundCell.trailingAnchor, constant: -10)
+            progressBar.leadingAnchor.constraint(equalTo: backgroundCell.leadingAnchor, constant: 20),
+            progressBar.trailingAnchor.constraint(equalTo: backgroundCell.trailingAnchor, constant: -20)
         ])
     }
 }

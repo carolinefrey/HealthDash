@@ -24,10 +24,10 @@ struct Provider: TimelineProvider {
         var entries: [DashboardEntry] = []
         
         let userDefaults = UserDefaults(suiteName: "group.healthDashWidgetCache")
-        let sleep = userDefaults?.value(forKey: "sleep") as? Double ?? 0.0
-        let weight = userDefaults?.value(forKey: "weight") as? Double ?? 0.0
-        let activeEnergy = userDefaults?.value(forKey: "activeEnergy") as? Double ?? 0.0
-        let steps = userDefaults?.value(forKey: "steps") as? Double ?? 0.0
+        let sleep = userDefaults?.value(forKey: UserDefaultsKey.sleep.rawValue) as? Double ?? 0.0
+        let weight = userDefaults?.value(forKey: UserDefaultsKey.weight.rawValue) as? Double ?? 0.0
+        let activeEnergy = userDefaults?.value(forKey: UserDefaultsKey.activeEnergy.rawValue) as? Double ?? 0.0
+        let steps = userDefaults?.value(forKey: UserDefaultsKey.steps.rawValue) as? Double ?? 0.0
         
         //Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
@@ -55,7 +55,7 @@ struct DashboardEntry: TimelineEntry {
     let steps: Double
 }
 
-struct HealthDashWidgetEntryView : View {
+struct HealthMetricDashWidgetEntryView : View {
     var entry: DashboardEntry
     
     var body: some View {
@@ -75,10 +75,10 @@ struct HealthDashWidgetEntryView : View {
         
         //retrieve targets
         let userDefaults = UserDefaults(suiteName: "group.healthDashWidgetCache")
-        let sleepTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.sleep.rawValue) ?? 0.0)
-        let weightTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.weight.rawValue) ?? 0.0)
-        let calorieTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.activeEnergy.rawValue) ?? 0.0)
-        let stepTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.steps.rawValue) ?? 0.0)
+        let sleepTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.targetSleep.rawValue) ?? 0.0)
+        let weightTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.targetWeight.rawValue) ?? 0.0)
+        let calorieTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.targetCalories.rawValue) ?? 0.0)
+        let stepTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.targetSteps.rawValue) ?? 0.0)
         
         ZStack {
             Color(UIColor(named: "WidgetBackground")!)
@@ -185,12 +185,12 @@ struct HealthDashWidgetEntryView : View {
 }
 
 @main
-struct HealthDashWidget: Widget {
-    let kind: String = "HealthDashWidget"
+struct HealthMetricDash: Widget {
+    let kind: String = "HealthMetricDashWidget"
     
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            HealthDashWidgetEntryView(entry: entry)
+            HealthMetricDashWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Dashboard")
         .description("Display a widget with updated Dashboard metrics.")
@@ -198,9 +198,9 @@ struct HealthDashWidget: Widget {
     }
 }
 
-struct HealthDashWidget_Previews: PreviewProvider {
+struct HealthMetricDashWidget_Previews: PreviewProvider {
     static var previews: some View {
-        HealthDashWidgetEntryView(entry: Provider.Entry(date: Date(), sleep: 0.0, weight: 0.0, activeEnergy: 0.0, steps: 0.0))
+        HealthMetricDashWidgetEntryView(entry: Provider.Entry(date: Date(), sleep: 0.0, weight: 0.0, activeEnergy: 0.0, steps: 0.0))
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

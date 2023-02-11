@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B920B639298937C1005158C3"
-               BuildableName = "HealthDashWidgetExtension.appex"
-               BlueprintName = "HealthDashWidgetExtension"
-               ReferencedContainer = "container:HealthDash.xcodeproj">
+               BuildableName = "HealthMetricDashWidgetExtension.appex"
+               BlueprintName = "HealthMetricDashWidgetExtension"
+               ReferencedContainer = "container:HealthMetricDash.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -30,9 +30,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B975C25D296F6F720046044F"
-               BuildableName = "HealthDash.app"
-               BlueprintName = "HealthDash"
-               ReferencedContainer = "container:HealthDash.xcodeproj">
+               BuildableName = "HealthMetricDash.app"
+               BlueprintName = "HealthMetricDash"
+               ReferencedContainer = "container:HealthMetricDash.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -63,18 +63,18 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B920B639298937C1005158C3"
-            BuildableName = "HealthDashWidgetExtension.appex"
-            BlueprintName = "HealthDashWidgetExtension"
-            ReferencedContainer = "container:HealthDash.xcodeproj">
+            BuildableName = "HealthMetricDashWidgetExtension.appex"
+            BlueprintName = "HealthMetricDashWidgetExtension"
+            ReferencedContainer = "container:HealthMetricDash.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B975C25D296F6F720046044F"
-            BuildableName = "HealthDash.app"
-            BlueprintName = "HealthDash"
-            ReferencedContainer = "container:HealthDash.xcodeproj">
+            BuildableName = "HealthMetricDash.app"
+            BlueprintName = "HealthMetricDash"
+            ReferencedContainer = "container:HealthMetricDash.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <EnvironmentVariables>
@@ -108,9 +108,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B975C25D296F6F720046044F"
-            BuildableName = "HealthDash.app"
-            BlueprintName = "HealthDash"
-            ReferencedContainer = "container:HealthDash.xcodeproj">
+            BuildableName = "HealthMetricDash.app"
+            BlueprintName = "HealthMetricDash"
+            ReferencedContainer = "container:HealthMetricDash.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

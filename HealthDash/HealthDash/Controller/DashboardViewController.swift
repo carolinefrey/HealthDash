@@ -14,6 +14,10 @@ enum UserDefaultsKey: String {
     case weight = "weight"
     case activeEnergy = "activeEnergy"
     case steps = "steps"
+    case targetSleep = "targetSleep"
+    case targetWeight = "targetWeight"
+    case targetCalories = "targetCalories"
+    case targetSteps = "targetSteps"
 }
 
 class DashboardViewController: UIViewController {
@@ -43,9 +47,8 @@ class DashboardViewController: UIViewController {
         contentView = MainContentView()
         view = contentView
         
-        configureCollectionView()
-        contentView.greetingView.configureGreeting()
-                
+        configureTableView()
+        
         healthStore = HealthStore()
         
         if let healthStore = healthStore {
@@ -73,15 +76,15 @@ class DashboardViewController: UIViewController {
         userDefaults?.setValue(steps, forKey: "steps")
         
         DispatchQueue.main.async { [weak self] in
-            self?.contentView.dashboardCollectionView.dataCollectionView.reloadData()
+            self?.contentView.dashboardTableView.dataTableView.reloadData()
             WidgetCenter.shared.reloadAllTimelines()
         }
     }
     
     // MARK: - Functions
     
-    private func configureCollectionView() {
-        contentView.dashboardCollectionView.dataCollectionView.dataSource = self
+    private func configureTableView() {
+        contentView.dashboardTableView.dataTableView.dataSource = self
     }
     
     @objc func presentSettingsView() {
@@ -91,15 +94,15 @@ class DashboardViewController: UIViewController {
     }
 }
 
-// MARK: - UICollectionViewDataSource
+// MARK: - UITableViewDataSource
 
-extension DashboardViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension DashboardViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DashboardCollectionViewCell.dashboardCollectionViewCellIdentifier, for: indexPath) as! DashboardCollectionViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: DashboardTableViewCell.dashboardTableViewCellIdentifier, for: indexPath) as! DashboardTableViewCell
 
         var array = [Data]()
         Data.allCases.forEach { data in
@@ -109,29 +112,18 @@ extension DashboardViewController: UICollectionViewDataSource {
         switch array[indexPath.row] {
         case .sleep:
             cell.configureCell(dataType: array[indexPath.row], data: healthStore?.sleepDuration ?? 0.0)
-            cell.configureProgressBars(dataType: array[indexPath.row], data: healthStore?.sleepDuration ?? 0.0)
         case .weight:
             cell.configureCell(dataType: array[indexPath.row], data: healthStore?.weight ?? 0.0)
-            cell.configureProgressBars(dataType: array[indexPath.row], data: healthStore?.weight ?? 0.0)
         case .activeEnergy:
             cell.configureCell(dataType: array[indexPath.row], data: healthStore?.activeEnergy ?? 0.0)
-            cell.configureProgressBars(dataType: array[indexPath.row], data: healthStore?.activeEnergy ?? 0.0)
         case .steps:
             cell.configureCell(dataType: array[indexPath.row], data: healthStore?.stepCount ?? 0.0)
-            cell.configureProgressBars(dataType: array[indexPath.row], data: healthStore?.stepCount ?? 0.0)
         }
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderCollectionReusableView.identifier, for: indexPath) as! HeaderCollectionReusableView
-        header.configure()
-        header.delegate = self
-        return header
-    }
 }
 
-// MARK: - HeaderCollectionReusableViewDelegate
+// MARK: - HeaderTableReusableViewDelegate
 
 extension DashboardViewController: HeaderCollectionReusableViewDelegate {
     func tapRefreshDataButton() {
@@ -152,7 +144,7 @@ extension DashboardViewController: HeaderCollectionReusableViewDelegate {
         userDefaults?.setValue(steps, forKey: UserDefaultsKey.steps.rawValue)
         
         DispatchQueue.main.async { [weak self] in
-            self?.contentView.dashboardCollectionView.dataCollectionView.reloadData()
+            self?.contentView.dashboardTableView.dataTableView.reloadData()
             WidgetCenter.shared.reloadAllTimelines()
         }
     }
@@ -162,7 +154,7 @@ extension DashboardViewController: HeaderCollectionReusableViewDelegate {
 
 extension DashboardViewController: SetTargetsDelegate {
     func didUpdateTargets(targetSleep: Double, targetWeight: Double, targetCalories: Double, targetSteps: Double) {
-        contentView.dashboardCollectionView.dataCollectionView.reloadData()
+        contentView.dashboardTableView.dataTableView.reloadData()
         WidgetCenter.shared.reloadAllTimelines()
     }
 }

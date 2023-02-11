@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:">
+      location = "self:/Users/carolinefrey/Developer/HealthDash/HealthDash/HealthMetricDash.xcodeproj">
    </FileRef>
 </Workspace>

@@ -23,10 +23,10 @@ class MainContentView: UIView {
         return view
     }()
     
-    let dashboardCollectionView: DashboardCollectionView = {
-        let collection = DashboardCollectionView()
-        collection.translatesAutoresizingMaskIntoConstraints = false
-        return collection
+    let dashboardTableView: DashboardTableView = {
+        let table = DashboardTableView()
+        table.translatesAutoresizingMaskIntoConstraints = false
+        return table
     }()
     
     //MARK: - Initializers
@@ -53,17 +53,17 @@ class MainContentView: UIView {
     
     private func configureViews() {
         addSubview(greetingView)
-        addSubview(dashboardCollectionView)
+        addSubview(dashboardTableView)
                         
         NSLayoutConstraint.activate([            
             greetingView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             greetingView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             greetingView.heightAnchor.constraint(equalToConstant: 80),
             
-            dashboardCollectionView.topAnchor.constraint(equalTo: greetingView.bottomAnchor),
-            dashboardCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            dashboardCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            dashboardCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            dashboardTableView.topAnchor.constraint(equalTo: greetingView.bottomAnchor),
+            dashboardTableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            dashboardTableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            dashboardTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
 }

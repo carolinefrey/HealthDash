@@ -19,15 +19,15 @@ class HeaderCollectionReusableView: UICollectionReusableView {
     
     weak var delegate: HeaderCollectionReusableViewDelegate?
 
-    private let headerLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Oxygen-Regular", size: 24)
-        label.text = "Today"
-        label.textAlignment = .left
-        label.textColor = UIColor(named: "Navy")
-        return label
-    }()
+//    private let headerLabel: UILabel = {
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.font = UIFont(name: "Oxygen-Regular", size: 24)
+//        label.text = "Today"
+//        label.textAlignment = .left
+//        label.textColor = UIColor(named: "Navy")
+//        return label
+//    }()
     
     lazy var refreshButton: UIButton = {
         let config = UIImage.SymbolConfiguration(pointSize: 44, weight: .light)
@@ -49,12 +49,12 @@ class HeaderCollectionReusableView: UICollectionReusableView {
     // MARK: - UISetup
     
     public func configure() {
-        addSubview(headerLabel)
+//        addSubview(headerLabel)
         addSubview(refreshButton)
         
         NSLayoutConstraint.activate([
-            headerLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+//            headerLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+//            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             
             refreshButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             refreshButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),

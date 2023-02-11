@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B975C25D296F6F720046044F"
-               BuildableName = "HealthDash.app"
-               BlueprintName = "HealthDash"
-               ReferencedContainer = "container:HealthDash.xcodeproj">
+               BuildableName = "HealthMetricDash.app"
+               BlueprintName = "HealthMetricDash"
+               ReferencedContainer = "container:HealthMetricDash.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B975C25D296F6F720046044F"
-            BuildableName = "HealthDash.app"
-            BlueprintName = "HealthDash"
-            ReferencedContainer = "container:HealthDash.xcodeproj">
+            BuildableName = "HealthMetricDash.app"
+            BlueprintName = "HealthMetricDash"
+            ReferencedContainer = "container:HealthMetricDash.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B975C25D296F6F720046044F"
-            BuildableName = "HealthDash.app"
-            BlueprintName = "HealthDash"
-            ReferencedContainer = "container:HealthDash.xcodeproj">
+            BuildableName = "HealthMetricDash.app"
+            BlueprintName = "HealthMetricDash"
+            ReferencedContainer = "container:HealthMetricDash.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -17,6 +17,7 @@ class GreetingView: UIView {
         greeting.textAlignment = .left
         greeting.font = UIFont(name: "Oxygen-Bold", size: 36)
         greeting.textColor = UIColor(named: "Navy")
+        greeting.text = "Dashboard"
         return greeting
     }()
     
@@ -41,19 +42,5 @@ class GreetingView: UIView {
             greetingLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             greetingLabel.leadingAnchor.constraint(equalTo: leadingAnchor)
         ])
-    }
-    
-    public func configureGreeting() {
-        let date = Date()
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: date)
-        
-        if hour < 12 {
-            greetingLabel.text = "Good morning!"
-        } else if hour > 12 && hour < 16 {
-            greetingLabel.text = "Good afternoon!"
-        } else {
-            greetingLabel.text = "Good evening!"
-        }
     }
 }

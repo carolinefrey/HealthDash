@@ -147,10 +147,10 @@ class SettingsView: UIView {
         super.init(frame: .zero)
         
         backgroundColor = UIColor(named: "MainBackground")
-        targetSleepTextView.text = String(userDefaults?.double(forKey: UserDefaultsKey.sleep.rawValue) ?? 0.0)
-        targetWeightTextView.text = String(userDefaults?.double(forKey:UserDefaultsKey.weight.rawValue) ?? 0.0)
-        targetCaloriesTextView.text = String(userDefaults?.double(forKey: UserDefaultsKey.activeEnergy.rawValue) ?? 0.0)
-        targetStepsTextView.text = String(userDefaults?.double(forKey: UserDefaultsKey.steps.rawValue) ?? 0.0)
+        targetSleepTextView.text = String(userDefaults?.double(forKey: UserDefaultsKey.targetSleep.rawValue) ?? 0.0)
+        targetWeightTextView.text = String(userDefaults?.double(forKey:UserDefaultsKey.targetWeight.rawValue) ?? 0.0)
+        targetCaloriesTextView.text = String(userDefaults?.double(forKey: UserDefaultsKey.targetCalories.rawValue) ?? 0.0)
+        targetStepsTextView.text = String(userDefaults?.double(forKey: UserDefaultsKey.targetSteps.rawValue) ?? 0.0)
         
         setUpViews()
     }

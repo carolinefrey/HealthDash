@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 enum Data: CaseIterable {
     case sleep, weight, activeEnergy, steps
@@ -53,6 +54,8 @@ class DashboardTableViewCell: UITableViewCell {
         return text
     }()
     
+    var metricHistoryGraph = UIView()
+
     // MARK: - Initializers
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -67,6 +70,7 @@ class DashboardTableViewCell: UITableViewCell {
     // MARK: - Functions
     
     func configureCell(dataType: Data, data: Double) {
+        
         switch dataType {
         case .sleep:
             icon.image = UIImage(systemName: "bed.double.fill")
@@ -123,6 +127,27 @@ class DashboardTableViewCell: UITableViewCell {
             circularProgressView.progress = Float(data / target)
         }
     }
+    
+    func configureGraphs(dataType: Data) {
+        switch dataType {
+        case .sleep:
+            let data = userDefaults?.object(forKey: UserDefaultsKey.sleepHistory.rawValue) as? [Double] ?? [Double]()
+            let sleepHistoryGraph = UIHostingController(rootView: HealthMetricHistory(dataHistory: data))
+            metricHistoryGraph = sleepHistoryGraph.view
+        case .weight:
+            let data = userDefaults?.object(forKey: UserDefaultsKey.weightHistory.rawValue) as? [Double] ?? [Double]()
+            let weightHistoryGraph = UIHostingController(rootView: HealthMetricHistory(dataHistory: data))
+            metricHistoryGraph = weightHistoryGraph.view
+        case .activeEnergy:
+            let data = userDefaults?.object(forKey: UserDefaultsKey.activeEnergyHistory.rawValue) as? [Double] ?? [Double]()
+            let calorieHistoryGraph = UIHostingController(rootView: HealthMetricHistory(dataHistory: data))
+            metricHistoryGraph = calorieHistoryGraph.view
+        case .steps:
+            let data = userDefaults?.object(forKey: UserDefaultsKey.stepsHistory.rawValue) as? [Double] ?? [Double]()
+            let stepsHistoryGraph = UIHostingController(rootView: HealthMetricHistory(dataHistory: data))
+            metricHistoryGraph = stepsHistoryGraph.view
+        }
+    }
 
     // MARK: - UI Setup
 
@@ -131,10 +156,12 @@ class DashboardTableViewCell: UITableViewCell {
         addSubview(icon)
         addSubview(dataText)
         addSubview(dataLabel)
+        addSubview(metricHistoryGraph)
+        metricHistoryGraph.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             circularProgressView.topAnchor.constraint(equalTo: topAnchor),
-            circularProgressView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            circularProgressView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             circularProgressView.widthAnchor.constraint(equalToConstant: 140),
             circularProgressView.heightAnchor.constraint(equalToConstant: 140),
             
@@ -145,10 +172,16 @@ class DashboardTableViewCell: UITableViewCell {
 
             dataText.centerXAnchor.constraint(equalTo: circularProgressView.centerXAnchor),
             dataText.centerYAnchor.constraint(equalTo: circularProgressView.centerYAnchor),
+            dataText.leadingAnchor.constraint(equalTo: circularProgressView.leadingAnchor, constant: 20),
+            dataText.trailingAnchor.constraint(equalTo: circularProgressView.trailingAnchor, constant: -20),
 
             dataLabel.centerXAnchor.constraint(equalTo: circularProgressView.centerXAnchor),
             dataLabel.topAnchor.constraint(equalTo: dataText.bottomAnchor),
             
+            metricHistoryGraph.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            metricHistoryGraph.leadingAnchor.constraint(equalTo: circularProgressView.trailingAnchor, constant: 25),
+            metricHistoryGraph.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            metricHistoryGraph.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
         ])
     }
 }

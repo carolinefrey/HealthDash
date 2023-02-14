@@ -22,14 +22,20 @@ class HealthStore {
     var sleepDuration = 0.0
     var activeEnergy = 0.0
     
+    var stepCountHistory = [Double]()
+    var weightHistory = [Double]()
+    var sleepDurationHistory = [Double]()
+    var activeEnergyHistory = [Double]()
+    
     init() {
         if HKHealthStore.isHealthDataAvailable() {
             healthStore = HKHealthStore()
         }
     }
     
+    //MARK: - Calculate data
+    
     func requestAuthorization(completion: @escaping (Bool) -> Void) {
-        
         let sleepType = HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!
         let weightType = HKObjectType.quantityType(forIdentifier: .bodyMass)!
         let stepType = HKObjectType.quantityType(forIdentifier: .stepCount)!
@@ -115,7 +121,7 @@ class HealthStore {
         guard let activeEnergyType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned) else {
             fatalError("Unable to retrieve activeEnergy")
         }
-
+        
         let calendar = NSCalendar.current
         let now = Date()
         let components = calendar.dateComponents([.year, .month, .day], from: now)
@@ -152,22 +158,22 @@ class HealthStore {
         guard let sleepType = HKSampleType.categoryType(forIdentifier: .sleepAnalysis) else {
             fatalError("Unable to retrieve body mass")
         }
-
+        
         let calendar = NSCalendar.current
         let now = Date()
         let components = calendar.dateComponents([.year, .month, .day], from: now)
-
+        
         guard let endDate = calendar.date(from: components) else {
             fatalError("Unable to create the start date")
         }
         guard let startDate = calendar.date(byAdding: .day, value: -1, to: endDate) else {
             fatalError("Unable to create the end date")
         }
-
+        
         let today = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [.strictStartDate])
-
+        
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false) //get most recent data first
-
+        
         sleepQuery = HKSampleQuery(sampleType: sleepType, predicate: today, limit: HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor]) { (query, results, error) in
             
             var timeInBed = 0.0
@@ -179,23 +185,133 @@ class HealthStore {
                     }
                 }
                 completion(timeInBed)
-                
-//                for item in result {
-//                    if let sample = item as? HKCategorySample {
-//                        if sample.value == HKCategoryValueSleepAnalysis.inBed.rawValue && sample.startDate >= startDate {
-//                            let sleepTime = sample.endDate.timeIntervalSince(sample.startDate)
-//                            timeInBed += sleepTime
-//                        }
-//                    }
-//                }
-//                completion(timeInBed)
             }
         }
-
+        
         if let healthStore = healthStore, let query = self.sleepQuery {
             healthStore.execute(query)
         }
     }
+    
+    func calculateStepsHistory(forPast days: Int, completion: @escaping (Double) -> Void) {
+        guard let stepCountType = HKObjectType.quantityType(forIdentifier: .stepCount) else {
+            print("Unable to create a step count type")
+            return
+        }
+        
+        let now = Date()
+        let startDate = Calendar.current.date(byAdding: DateComponents(day: -days), to: now)!
+        
+        var interval = DateComponents()
+        interval.day = 1
+        
+        var anchorComponents = Calendar.current.dateComponents([.day, .month, .year], from: now)
+        anchorComponents.hour = 0
+        let anchorDate = Calendar.current.date(from: anchorComponents)!
+        
+        let query = HKStatisticsCollectionQuery(quantityType: stepCountType,
+                                                quantitySamplePredicate: nil,
+                                                options: [.mostRecent],
+                                                anchorDate: anchorDate,
+                                                intervalComponents: interval)
+        query.initialResultsHandler = { _, results, error in
+            guard let results = results else {
+                print("ERROR")
+                return
+            }
+            
+            results.enumerateStatistics(from: startDate, to: now) { statistics, _ in
+                if let sum = statistics.sumQuantity() {
+                    let stepCountValue = sum.doubleValue(for: HKUnit.count())
+                    completion(stepCountValue)
+                    return
+                }
+            }
+        }
+        healthStore?.execute(query)
+    }
+    
+    func calculateWeightHistory(forPast days: Int, completion: @escaping (Double) -> Void) {
+        guard let weightType = HKObjectType.quantityType(forIdentifier: .bodyMass) else {
+            print("Unable to create a weight type")
+            return
+        }
+        
+        let now = Date()
+        let startDate = Calendar.current.date(byAdding: DateComponents(day: -days), to: now)!
+        
+        var interval = DateComponents()
+        interval.day = 1
+        
+        var anchorComponents = Calendar.current.dateComponents([.day, .month, .year], from: now)
+        anchorComponents.hour = 0
+        let anchorDate = Calendar.current.date(from: anchorComponents)!
+        
+        let query = HKStatisticsCollectionQuery(quantityType: weightType,
+                                                quantitySamplePredicate: nil,
+                                                options: [.mostRecent],
+                                                anchorDate: anchorDate,
+                                                intervalComponents: interval)
+        query.initialResultsHandler = { _, results, error in
+            guard let results = results else {
+                print("ERROR")
+                return
+            }
+            
+            results.enumerateStatistics(from: startDate, to: now) { statistics, _ in
+                if let sum = statistics.mostRecentQuantity() {
+                    let weightValue = sum.doubleValue(for: HKUnit.pound())
+                    completion(weightValue)
+                    return
+                }
+            }
+        }
+        healthStore?.execute(query)
+    }
+    
+    func calculateSleepHistory(forPast days: Int, completion: @escaping (Double) -> Void) {
+        //TODO: - Implement sleep calculation here
+    }
+    
+    func calculateActiveEnergyHistory(forPast days: Int, completion: @escaping (Double) -> Void) {
+        guard let activeEnergyType = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned) else {
+            print("Unable to create a calorie type")
+            return
+        }
+        
+        let now = Date()
+        let startDate = Calendar.current.date(byAdding: DateComponents(day: -days), to: now)!
+        
+        var interval = DateComponents()
+        interval.day = 1
+        
+        var anchorComponents = Calendar.current.dateComponents([.day, .month, .year], from: now)
+        anchorComponents.hour = 0
+        let anchorDate = Calendar.current.date(from: anchorComponents)!
+        
+        let query = HKStatisticsCollectionQuery(quantityType: activeEnergyType,
+                                                quantitySamplePredicate: nil,
+                                                options: [.mostRecent],
+                                                anchorDate: anchorDate,
+                                                intervalComponents: interval)
+        query.initialResultsHandler = { _, results, error in
+            guard let results = results else {
+                print("ERROR")
+                return
+            }
+            
+            results.enumerateStatistics(from: startDate, to: now) { statistics, _ in
+                if let sum = statistics.sumQuantity() {
+                    let calorieValue = sum.doubleValue(for: HKUnit.kilocalorie())
+                    completion(calorieValue)
+                    return
+                }
+            }
+        }
+        healthStore?.execute(query)
+    }
+    
+    //MARK: - Retrieve Data
     
     func getHealthData() {
         calculateSteps { steps in
@@ -203,24 +319,39 @@ class HealthStore {
                 self.stepCount = steps
             }
         }
-        
         retrieveWeight { weight in
             if weight > 0 {
                 self.weight = weight
             }
         }
-        
         calculateActiveEnergy { calories in
             if calories > 0 {
                 self.activeEnergy = calories
             }
         }
-        
         calculateSleep { duration in
             if duration > 0 {
                 self.sleepDuration = duration
             }
         }
         WidgetCenter.shared.reloadAllTimelines()
+    }
+    
+    func getHealthDataHistory() {
+        calculateStepsHistory(forPast: 30) { steps in
+            self.stepCountHistory.append(steps)
+        }
+        
+        calculateWeightHistory(forPast: 30) { weight in
+            self.weightHistory.append(weight)
+        }
+        
+        calculateSleepHistory(forPast: 30) { sleep in
+            self.sleepDurationHistory.append(sleep)
+        }
+        
+        calculateActiveEnergyHistory(forPast: 30) { cals in
+            self.activeEnergyHistory.append(cals)
+        }
     }
 }

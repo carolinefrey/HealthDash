@@ -27,8 +27,8 @@
 		B93893CE2993CB61009E28FD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93893CC2993C8CA009E28FD /* SettingsView.swift */; };
 		B93C0BBB2997C7190039D626 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93C0BBA2997C7190039D626 /* CircularProgressView.swift */; };
 		B93C0BBC2997C7190039D626 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93C0BBA2997C7190039D626 /* CircularProgressView.swift */; };
-		B93C0BBE299817960039D626 /* HealthMetricHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93C0BBD299817960039D626 /* HealthMetricHistory.swift */; };
-		B93C0BBF299817960039D626 /* HealthMetricHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93C0BBD299817960039D626 /* HealthMetricHistory.swift */; };
+		B93C0BBE299817960039D626 /* WeightHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93C0BBD299817960039D626 /* WeightHistoryView.swift */; };
+		B93C0BBF299817960039D626 /* WeightHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93C0BBD299817960039D626 /* WeightHistoryView.swift */; };
 		B975C262296F6F720046044F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C261296F6F720046044F /* AppDelegate.swift */; };
 		B975C264296F6F720046044F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C263296F6F720046044F /* SceneDelegate.swift */; };
 		B975C266296F6F720046044F /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C265296F6F720046044F /* DashboardViewController.swift */; };
@@ -41,7 +41,15 @@
 		B975C284296F75EE0046044F /* DashboardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C283296F75EE0046044F /* DashboardTableView.swift */; };
 		B975C286296F76EB0046044F /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C285296F76EB0046044F /* DashboardTableViewCell.swift */; };
 		B975C288296F78E60046044F /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B975C287296F78E60046044F /* MainContentView.swift */; };
+		B98978F329A5168F0051215D /* ActiveEnergyHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98978F229A5168F0051215D /* ActiveEnergyHistoryView.swift */; };
+		B98978F429A5168F0051215D /* ActiveEnergyHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98978F229A5168F0051215D /* ActiveEnergyHistoryView.swift */; };
+		B98978F629A516D40051215D /* SleepHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98978F529A516D40051215D /* SleepHistoryView.swift */; };
+		B98978F729A516D40051215D /* SleepHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98978F529A516D40051215D /* SleepHistoryView.swift */; };
 		B9B9A5A529702DF5004719D6 /* HealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B9A5A429702DF5004719D6 /* HealthStore.swift */; };
+		B9BED03C299D768A00F1B512 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BED03B299D768A00F1B512 /* GraphViewController.swift */; };
+		B9BED03D299D768A00F1B512 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BED03B299D768A00F1B512 /* GraphViewController.swift */; };
+		B9BED03F299D81A700F1B512 /* StepsHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BED03E299D81A700F1B512 /* StepsHistoryView.swift */; };
+		B9BED040299D81A700F1B512 /* StepsHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BED03E299D81A700F1B512 /* StepsHistoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +86,7 @@
 		B93893C92993C622009E28FD /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B93893CC2993C8CA009E28FD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B93C0BBA2997C7190039D626 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
-		B93C0BBD299817960039D626 /* HealthMetricHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthMetricHistory.swift; sourceTree = "<group>"; };
+		B93C0BBD299817960039D626 /* WeightHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightHistoryView.swift; sourceTree = "<group>"; };
 		B9567564299328980059F523 /* HealthDashWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthDashWidgetExtension.entitlements; sourceTree = "<group>"; };
 		B975C25E296F6F720046044F /* HealthMetricDash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthMetricDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B975C261296F6F720046044F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,8 +102,12 @@
 		B975C283296F75EE0046044F /* DashboardTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableView.swift; sourceTree = "<group>"; };
 		B975C285296F76EB0046044F /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
 		B975C287296F78E60046044F /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
+		B98978F229A5168F0051215D /* ActiveEnergyHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveEnergyHistoryView.swift; sourceTree = "<group>"; };
+		B98978F529A516D40051215D /* SleepHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepHistoryView.swift; sourceTree = "<group>"; };
 		B9B9A5A329702DB1004719D6 /* HealthDash.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthDash.entitlements; sourceTree = "<group>"; };
 		B9B9A5A429702DF5004719D6 /* HealthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStore.swift; sourceTree = "<group>"; };
+		B9BED03B299D768A00F1B512 /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
+		B9BED03E299D81A700F1B512 /* StepsHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsHistoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,7 +194,10 @@
 				B975C285296F76EB0046044F /* DashboardTableViewCell.swift */,
 				B93893CC2993C8CA009E28FD /* SettingsView.swift */,
 				B93C0BBA2997C7190039D626 /* CircularProgressView.swift */,
-				B93C0BBD299817960039D626 /* HealthMetricHistory.swift */,
+				B93C0BBD299817960039D626 /* WeightHistoryView.swift */,
+				B9BED03E299D81A700F1B512 /* StepsHistoryView.swift */,
+				B98978F229A5168F0051215D /* ActiveEnergyHistoryView.swift */,
+				B98978F529A516D40051215D /* SleepHistoryView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -200,6 +215,7 @@
 			children = (
 				B975C265296F6F720046044F /* DashboardViewController.swift */,
 				B93893C92993C622009E28FD /* SettingsViewController.swift */,
+				B9BED03B299D768A00F1B512 /* GraphViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -330,17 +346,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B93C0BBF299817960039D626 /* HealthMetricHistory.swift in Sources */,
+				B93C0BBF299817960039D626 /* WeightHistoryView.swift in Sources */,
+				B98978F429A5168F0051215D /* ActiveEnergyHistoryView.swift in Sources */,
 				B920B642298937C1005158C3 /* HealthMetricDashWidget.swift in Sources */,
 				B937CF2329893E3F005A8949 /* DashboardTableViewCell.swift in Sources */,
 				B93893CB2993C628009E28FD /* SettingsViewController.swift in Sources */,
 				B937CF2129893E30005A8949 /* GreetingView.swift in Sources */,
+				B98978F729A516D40051215D /* SleepHistoryView.swift in Sources */,
 				B920B64D298938EB005158C3 /* DashboardViewController.swift in Sources */,
+				B9BED03D299D768A00F1B512 /* GraphViewController.swift in Sources */,
 				B937CF1F29893E25005A8949 /* HealthStore.swift in Sources */,
 				B937CF2229893E32005A8949 /* DashboardTableView.swift in Sources */,
 				B937CF2029893E29005A8949 /* MainContentView.swift in Sources */,
 				B93893CE2993CB61009E28FD /* SettingsView.swift in Sources */,
 				B93C0BBC2997C7190039D626 /* CircularProgressView.swift in Sources */,
+				B9BED040299D81A700F1B512 /* StepsHistoryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,13 +371,17 @@
 				B9B9A5A529702DF5004719D6 /* HealthStore.swift in Sources */,
 				B975C286296F76EB0046044F /* DashboardTableViewCell.swift in Sources */,
 				B93893CA2993C622009E28FD /* SettingsViewController.swift in Sources */,
-				B93C0BBE299817960039D626 /* HealthMetricHistory.swift in Sources */,
+				B93C0BBE299817960039D626 /* WeightHistoryView.swift in Sources */,
 				B975C266296F6F720046044F /* DashboardViewController.swift in Sources */,
 				B975C27B296F71E90046044F /* GreetingView.swift in Sources */,
 				B975C284296F75EE0046044F /* DashboardTableView.swift in Sources */,
+				B98978F629A516D40051215D /* SleepHistoryView.swift in Sources */,
 				B975C262296F6F720046044F /* AppDelegate.swift in Sources */,
+				B9BED03F299D81A700F1B512 /* StepsHistoryView.swift in Sources */,
+				B9BED03C299D768A00F1B512 /* GraphViewController.swift in Sources */,
 				B975C288296F78E60046044F /* MainContentView.swift in Sources */,
 				B975C264296F6F720046044F /* SceneDelegate.swift in Sources */,
+				B98978F329A5168F0051215D /* ActiveEnergyHistoryView.swift in Sources */,
 				B93C0BBB2997C7190039D626 /* CircularProgressView.swift in Sources */,
 				B93893CD2993C8CA009E28FD /* SettingsView.swift in Sources */,
 			);

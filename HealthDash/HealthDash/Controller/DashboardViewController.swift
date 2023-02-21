@@ -51,12 +51,19 @@ class DashboardViewController: UIViewController {
         return button
     }()
     
-//    var sleepHistoryGraph = UIView()
-    
+    lazy var viewGraphButton: UIBarButtonItem = {
+        let config = UIImage.SymbolConfiguration(textStyle: .title3)
+        let icon = UIImage(systemName: "chart.line.uptrend.xyaxis", withConfiguration: config)
+        let button = UIBarButtonItem(image: icon, style: .plain, target: self, action: #selector(presentGraphView))
+        button.tintColor = UIColor(named: "Navy")
+        return button
+    }()
+        
     // MARK: - Lifecycle
 
     override func loadView() {
         super.loadView()
+        navigationItem.leftBarButtonItem = viewGraphButton
         navigationItem.rightBarButtonItems = [refreshButton, settingsButton]
 
         contentView = MainContentView()
@@ -75,40 +82,11 @@ class DashboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let userDefaults = UserDefaults(suiteName: "group.healthDashWidgetCache")
-        
-        healthStore?.getHealthData()
-//        healthStore?.getHealthDataHistory()
-        
-        let sleep = healthStore?.sleepDuration
-        let weight = healthStore?.weight
-        let activeEnergy = healthStore?.activeEnergy
-        let steps = healthStore?.stepCount
-    
-//        let sleepHistory = healthStore?.sleepDurationHistory
-//        let weightHistory = healthStore?.weightHistory
-//        let activeEnergyHistory = healthStore?.activeEnergyHistory
-//        let stepsHistory = healthStore?.stepCountHistory
-                
-        //send data to shared app group (so widget can access)
-        userDefaults?.setValue(sleep, forKey: UserDefaultsKey.sleep.rawValue)
-        userDefaults?.setValue(weight, forKey: UserDefaultsKey.weight.rawValue)
-        userDefaults?.setValue(activeEnergy, forKey: UserDefaultsKey.activeEnergy.rawValue)
-        userDefaults?.setValue(steps, forKey: UserDefaultsKey.steps.rawValue)
-        
-//        userDefaults?.setValue([sleepHistory], forKey: UserDefaultsKey.sleepHistory.rawValue)
-//        userDefaults?.setValue([weightHistory], forKey: UserDefaultsKey.weightHistory.rawValue)
-//        userDefaults?.setValue([activeEnergyHistory], forKey: UserDefaultsKey.activeEnergyHistory.rawValue)
-//        userDefaults?.setValue([stepsHistory], forKey: UserDefaultsKey.stepsHistory.rawValue)
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.contentView.dashboardTableView.dataTableView.reloadData()
-            WidgetCenter.shared.reloadAllTimelines()
-        }
+        refreshData()
     }
     
     // MARK: - Functions
-    
+
     private func configureTableView() {
         contentView.dashboardTableView.dataTableView.dataSource = self
     }
@@ -120,6 +98,15 @@ class DashboardViewController: UIViewController {
     }
     
     @objc func tapRefreshDataButton() {
+       refreshData()
+    }
+    
+    @objc func presentGraphView() {
+        let graphVC = GraphViewController()
+        present(graphVC, animated: true)
+    }
+    
+    private func refreshData() {
         let userDefaults = UserDefaults(suiteName: "group.healthDashWidgetCache")
         
         healthStore?.getHealthData()
@@ -171,16 +158,16 @@ extension DashboardViewController: UITableViewDataSource {
         switch array[indexPath.row] {
         case .sleep:
             cell.configureCell(dataType: array[indexPath.row], data: healthStore?.sleepDuration ?? 0.0)
-            cell.configureGraphs(dataType: array[indexPath.row])
+//            cell.configureGraphs(dataType: array[indexPath.row], data: healthStore?.sleepDurationHistory ?? [])
         case .weight:
             cell.configureCell(dataType: array[indexPath.row], data: healthStore?.weight ?? 0.0)
-            cell.configureGraphs(dataType: array[indexPath.row])
+//            cell.configureGraphs(dataType: array[indexPath.row], data: healthStore?.weightHistory ?? [])
         case .activeEnergy:
             cell.configureCell(dataType: array[indexPath.row], data: healthStore?.activeEnergy ?? 0.0)
-            cell.configureGraphs(dataType: array[indexPath.row])
+//            cell.configureGraphs(dataType: array[indexPath.row], data: healthStore?.activeEnergyHistory ?? [])
         case .steps:
             cell.configureCell(dataType: array[indexPath.row], data: healthStore?.stepCount ?? 0.0)
-            cell.configureGraphs(dataType: array[indexPath.row])
+//            cell.configureGraphs(dataType: array[indexPath.row], data: healthStore?.stepCountHistory ?? [])
         }
         return cell
     }

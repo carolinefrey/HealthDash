@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 enum Data: CaseIterable {
     case sleep, weight, activeEnergy, steps
@@ -19,39 +20,8 @@ class DashboardCollectionViewCell: UICollectionViewCell {
     
     let userDefaults = UserDefaults(suiteName: "group.healthDashWidgetCache")
     
-    let circularProgressView: CircularProgressView = {
-        let progress = CircularProgressView(frame: CGRect(x: 0, y: 0, width: 120, height: 120), lineWidth: 10, rounded: false)
-        progress.translatesAutoresizingMaskIntoConstraints = false
-        progress.progressColor = UIColor(named: "Navy")!
-        progress.trackColor = UIColor(named: "TrackColor")!
-        return progress
-    }()
-
-    let icon: UIImageView = {
-        let icon = UIImageView()
-        icon.translatesAutoresizingMaskIntoConstraints = false
-        icon.tintColor = UIColor(named: "Navy")
-        icon.image = UIImage(systemName: "bed.double.fill")
-        return icon
-    }()
-
-    let dataText: UILabel = {
-        let text = UILabel()
-        text.translatesAutoresizingMaskIntoConstraints = false
-        text.textAlignment = .center
-        text.textColor = UIColor(named: "Navy")
-        text.font = UIFont(name: "Oxygen-Regular", size: 26)
-        text.adjustsFontSizeToFitWidth = true
-        return text
-    }()
-
-    let dataLabel: UILabel = {
-        let text = UILabel()
-        text.translatesAutoresizingMaskIntoConstraints = false
-        text.textAlignment = .center
-        text.textColor = UIColor(named: "Navy")
-        text.font = UIFont(name: "Oxygen-Regular", size: 14)
-        return text
+    lazy var host: UIHostingController = {
+        return UIHostingController(rootView: SwiftUICell())
     }()
     
     //MARK: - Initializers
@@ -68,116 +38,85 @@ class DashboardCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Functions
     
-    func configureCell(dataType: Data, data: Double) {
-        icon.image = UIImage(systemName: "bed.double.fill")
-        switch dataType {
-        case .sleep:
-            icon.image = UIImage(systemName: "bed.double.fill")
-
-            //convert seconds to hours & minutes
-            let secondsInAnHour = 3600.0
-            let hours = data / secondsInAnHour
-            let remainder = hours.truncatingRemainder(dividingBy: 1)
-            let minutesRemaining = remainder * 60
-            let hoursFormatted = String(format: "%.0f", hours)
-            let minutes = String(format: "%.0f", minutesRemaining)
-
-            if data == 0 {
-                dataText.text = "no data"
-            } else {
-                dataText.text = "\(hoursFormatted) hrs \(minutes) min"
-                dataLabel.text = "in bed"
-            }
-            let target = Double(userDefaults?.double(forKey: UserDefaultsKey.targetSleep.rawValue) ?? 0.0)
-            circularProgressView.progress = Float(data / target)
-        case .weight:
-            icon.image = UIImage(systemName: "figure.arms.open")
-            if data == 0 {
-                dataText.text = "no data"
-            } else {
-                dataText.text = "\(data)"
-                dataLabel.text = "pounds"
-            }
-            let target = Double(userDefaults?.double(forKey: UserDefaultsKey.targetWeight.rawValue) ?? 0.0)
-            circularProgressView.progress = Float(data / target)
-        case .activeEnergy:
-            icon.image = UIImage(systemName: "flame.fill")
-            let formattedValue = String(format: "%.0f", data)
-
-            if data == 0 {
-                dataText.text = "no data"
-            } else {
-                dataText.text = "\(formattedValue)"
-                dataLabel.text = "calories burned"
-            }
-            let target = Double(userDefaults?.double(forKey: UserDefaultsKey.targetCalories.rawValue) ?? 0.0)
-            circularProgressView.progress = Float(data / target)
-        case .steps:
-            icon.image = UIImage(systemName: "shoeprints.fill")
-            let formattedValue = String(format: "%.0f", data)
-            if data == 0 {
-                dataText.text = "no data"
-            } else {
-                dataText.text = "\(formattedValue)"
-                dataLabel.text = "steps"
-            }
-            let target = Double(userDefaults?.double(forKey: UserDefaultsKey.targetSteps.rawValue) ?? 0.0)
-            circularProgressView.progress = Float(data / target)
-        }
+    func embed(in parent: UIViewController) {
+        parent.addChild(host)
+        host.didMove(toParent: parent)
     }
     
-//    func configureGraphs(dataType: Data, data: [Double]) {
+    deinit {
+        host.willMove(toParent: nil)
+        host.view.removeFromSuperview()
+        host.removeFromParent()
+    }
+    
+    func configureCell(dataType: Data, data: Double) {
 //        switch dataType {
 //        case .sleep:
-////            let data = userDefaults?.object(forKey: UserDefaultsKey.sleepHistory.rawValue) as? [Double] ?? [Double]()
-//            let sleepHistoryGraph = UIHostingController(rootView: HealthMetricHistory(dataHistory: data))
-//            metricHistoryGraph = sleepHistoryGraph.view
+//            icon.image = UIImage(systemName: "bed.double.fill")
+//
+//            //convert seconds to hours & minutes
+//            let secondsInAnHour = 3600.0
+//            let hours = data / secondsInAnHour
+//            let remainder = hours.truncatingRemainder(dividingBy: 1)
+//            let minutesRemaining = remainder * 60
+//            let hoursFormatted = String(format: "%.0f", hours)
+//            let minutes = String(format: "%.0f", minutesRemaining)
+//
+//            if data == 0 {
+//                dataText.text = "no data"
+//            } else {
+//                dataText.text = "\(hoursFormatted) hrs \(minutes) min"
+//                dataLabel.text = "in bed"
+//            }
+//            let target = Double(userDefaults?.double(forKey: UserDefaultsKey.targetSleep.rawValue) ?? 0.0)
+//            circularProgressView.progress = Float(data / target)
 //        case .weight:
-////            let data = userDefaults?.object(forKey: UserDefaultsKey.weightHistory.rawValue) as? [Double] ?? [Double]()
-//            let weightHistoryGraph = UIHostingController(rootView: HealthMetricHistory(dataHistory: data))
-//            metricHistoryGraph = weightHistoryGraph.view
+//            icon.image = UIImage(systemName: "figure.arms.open")
+//            if data == 0 {
+//                dataText.text = "no data"
+//            } else {
+//                dataText.text = "\(data)"
+//                dataLabel.text = "pounds"
+//            }
+//            let target = Double(userDefaults?.double(forKey: UserDefaultsKey.targetWeight.rawValue) ?? 0.0)
+//            circularProgressView.progress = Float(data / target)
 //        case .activeEnergy:
-////            let data = userDefaults?.object(forKey: UserDefaultsKey.activeEnergyHistory.rawValue) as? [Double] ?? [Double]()
-//            let calorieHistoryGraph = UIHostingController(rootView: HealthMetricHistory(dataHistory: data))
-//            metricHistoryGraph = calorieHistoryGraph.view
+//            icon.image = UIImage(systemName: "flame.fill")
+//            let formattedValue = String(format: "%.0f", data)
+//
+//            if data == 0 {
+//                dataText.text = "no data"
+//            } else {
+//                dataText.text = "\(formattedValue)"
+//                dataLabel.text = "calories burned"
+//            }
+//            let target = Double(userDefaults?.double(forKey: UserDefaultsKey.targetCalories.rawValue) ?? 0.0)
+//            circularProgressView.progress = Float(data / target)
 //        case .steps:
-////            let data = userDefaults?.object(forKey: UserDefaultsKey.stepsHistory.rawValue) as? [Double] ?? [Double]()
-//            let stepsHistoryGraph = UIHostingController(rootView: HealthMetricHistory(dataHistory: data))
-//            metricHistoryGraph = stepsHistoryGraph.view
+//            icon.image = UIImage(systemName: "shoeprints.fill")
+//            let formattedValue = String(format: "%.0f", data)
+//            if data == 0 {
+//                dataText.text = "no data"
+//            } else {
+//                dataText.text = "\(formattedValue)"
+//                dataLabel.text = "steps"
+//            }
+//            let target = Double(userDefaults?.double(forKey: UserDefaultsKey.targetSteps.rawValue) ?? 0.0)
+//            circularProgressView.progress = Float(data / target)
 //        }
-//    }
+    }
 
     // MARK: - UI Setup
 
     private func configureViews() {
-        addSubview(circularProgressView)
-        addSubview(icon)
-        addSubview(dataText)
-        addSubview(dataLabel)
+        host.view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(host.view)
         
         NSLayoutConstraint.activate([
-            circularProgressView.topAnchor.constraint(equalTo: topAnchor),
-            circularProgressView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            circularProgressView.widthAnchor.constraint(equalToConstant: 120),
-            circularProgressView.heightAnchor.constraint(equalToConstant: 120),
-            
-            icon.topAnchor.constraint(equalTo: circularProgressView.topAnchor, constant: 10),
-            icon.centerXAnchor.constraint(equalTo: circularProgressView.centerXAnchor),
-            icon.heightAnchor.constraint(equalToConstant: 25),
-            icon.widthAnchor.constraint(equalToConstant: 25),
-
-            dataText.centerXAnchor.constraint(equalTo: circularProgressView.centerXAnchor),
-            dataText.centerYAnchor.constraint(equalTo: circularProgressView.centerYAnchor),
-            dataText.leadingAnchor.constraint(equalTo: circularProgressView.leadingAnchor, constant: 20),
-            dataText.trailingAnchor.constraint(equalTo: circularProgressView.trailingAnchor, constant: -20),
-
-            dataLabel.centerXAnchor.constraint(equalTo: circularProgressView.centerXAnchor),
-            dataLabel.topAnchor.constraint(equalTo: dataText.bottomAnchor),
-            
-//            metricHistoryGraph.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-//            metricHistoryGraph.leadingAnchor.constraint(equalTo: circularProgressView.trailingAnchor, constant: 25),
-//            metricHistoryGraph.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-//            metricHistoryGraph.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            host.view.topAnchor.constraint(equalTo: contentView.topAnchor),
+            host.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            host.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            host.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
 }

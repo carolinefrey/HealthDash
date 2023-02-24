@@ -147,26 +147,29 @@ extension DashboardViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DashboardCollectionViewCell.dashboardCollectionViewCellIdentifier, for: indexPath) as! DashboardCollectionViewCell
 
-        var array = [Data]()
-        Data.allCases.forEach { data in
-            array.append(data)
-        }
-
-        switch array[indexPath.row] {
-        case .sleep:
-            cell.configureCell(dataType: array[indexPath.row], data: healthStore?.sleepDuration ?? 0.0)
-//            cell.configureGraphs(dataType: array[indexPath.row], data: healthStore?.sleepDurationHistory ?? [])
-        case .weight:
-            cell.configureCell(dataType: array[indexPath.row], data: healthStore?.weight ?? 0.0)
-//            cell.configureGraphs(dataType: array[indexPath.row], data: healthStore?.weightHistory ?? [])
-        case .activeEnergy:
-            cell.configureCell(dataType: array[indexPath.row], data: healthStore?.activeEnergy ?? 0.0)
-//            cell.configureGraphs(dataType: array[indexPath.row], data: healthStore?.activeEnergyHistory ?? [])
-        case .steps:
-            cell.configureCell(dataType: array[indexPath.row], data: healthStore?.stepCount ?? 0.0)
-//            cell.configureGraphs(dataType: array[indexPath.row], data: healthStore?.stepCountHistory ?? [])
-        }
+        cell.embed(in: self)
         return cell
+        
+//        var array = [Data]()
+//        Data.allCases.forEach { data in
+//            array.append(data)
+//        }
+//
+//        switch array[indexPath.row] {
+//        case .sleep:
+//            cell.configureCell(dataType: array[indexPath.row], data: healthStore?.sleepDuration ?? 0.0)
+////            cell.configureGraphs(dataType: array[indexPath.row], data: healthStore?.sleepDurationHistory ?? [])
+//        case .weight:
+//            cell.configureCell(dataType: array[indexPath.row], data: healthStore?.weight ?? 0.0)
+////            cell.configureGraphs(dataType: array[indexPath.row], data: healthStore?.weightHistory ?? [])
+//        case .activeEnergy:
+//            cell.configureCell(dataType: array[indexPath.row], data: healthStore?.activeEnergy ?? 0.0)
+////            cell.configureGraphs(dataType: array[indexPath.row], data: healthStore?.activeEnergyHistory ?? [])
+//        case .steps:
+//            cell.configureCell(dataType: array[indexPath.row], data: healthStore?.stepCount ?? 0.0)
+////            cell.configureGraphs(dataType: array[indexPath.row], data: healthStore?.stepCountHistory ?? [])
+//        }
+//        return cell
     }
 }
 

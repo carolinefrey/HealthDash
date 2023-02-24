@@ -1,40 +1,40 @@
 //
-//  DashboardTableViewCell.swift
+//  DashboardCollectionViewCell.swift
 //  HealthDash
 //
 //  Created by Caroline Frey on 1/11/23.
 //
 
 import UIKit
-import SwiftUI
 
 enum Data: CaseIterable {
     case sleep, weight, activeEnergy, steps
 }
 
-class DashboardTableViewCell: UITableViewCell {
+class DashboardCollectionViewCell: UICollectionViewCell {
     
     // MARK: - UI Properties
     
-    static let dashboardTableViewCellIdentifier = "DashboardTableViewCell"
+    static let dashboardCollectionViewCellIdentifier = "DashboardCollectionViewCell"
     
     let userDefaults = UserDefaults(suiteName: "group.healthDashWidgetCache")
     
     let circularProgressView: CircularProgressView = {
-        let progress = CircularProgressView(frame: CGRect(x: 10, y: 10, width: 120, height: 120), lineWidth: 10, rounded: false)
+        let progress = CircularProgressView(frame: CGRect(x: 0, y: 0, width: 120, height: 120), lineWidth: 10, rounded: false)
         progress.translatesAutoresizingMaskIntoConstraints = false
         progress.progressColor = UIColor(named: "Navy")!
         progress.trackColor = UIColor(named: "TrackColor")!
         return progress
     }()
-    
+
     let icon: UIImageView = {
         let icon = UIImageView()
         icon.translatesAutoresizingMaskIntoConstraints = false
         icon.tintColor = UIColor(named: "Navy")
+        icon.image = UIImage(systemName: "bed.double.fill")
         return icon
     }()
-    
+
     let dataText: UILabel = {
         let text = UILabel()
         text.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +44,7 @@ class DashboardTableViewCell: UITableViewCell {
         text.adjustsFontSizeToFitWidth = true
         return text
     }()
-    
+
     let dataLabel: UILabel = {
         let text = UILabel()
         text.translatesAutoresizingMaskIntoConstraints = false
@@ -54,10 +54,11 @@ class DashboardTableViewCell: UITableViewCell {
         return text
     }()
     
-    // MARK: - Initializers
+    //MARK: - Initializers
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
         configureViews()
     }
     
@@ -68,7 +69,7 @@ class DashboardTableViewCell: UITableViewCell {
     // MARK: - Functions
     
     func configureCell(dataType: Data, data: Double) {
-        
+        icon.image = UIImage(systemName: "bed.double.fill")
         switch dataType {
         case .sleep:
             icon.image = UIImage(systemName: "bed.double.fill")
@@ -99,7 +100,6 @@ class DashboardTableViewCell: UITableViewCell {
             }
             let target = Double(userDefaults?.double(forKey: UserDefaultsKey.targetWeight.rawValue) ?? 0.0)
             circularProgressView.progress = Float(data / target)
-            
         case .activeEnergy:
             icon.image = UIImage(systemName: "flame.fill")
             let formattedValue = String(format: "%.0f", data)
@@ -157,11 +157,11 @@ class DashboardTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             circularProgressView.topAnchor.constraint(equalTo: topAnchor),
-            circularProgressView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            circularProgressView.widthAnchor.constraint(equalToConstant: 140),
-            circularProgressView.heightAnchor.constraint(equalToConstant: 140),
+            circularProgressView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            circularProgressView.widthAnchor.constraint(equalToConstant: 120),
+            circularProgressView.heightAnchor.constraint(equalToConstant: 120),
             
-            icon.topAnchor.constraint(equalTo: circularProgressView.topAnchor, constant: 25),
+            icon.topAnchor.constraint(equalTo: circularProgressView.topAnchor, constant: 10),
             icon.centerXAnchor.constraint(equalTo: circularProgressView.centerXAnchor),
             icon.heightAnchor.constraint(equalToConstant: 25),
             icon.widthAnchor.constraint(equalToConstant: 25),

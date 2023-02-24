@@ -69,7 +69,8 @@ class DashboardViewController: UIViewController {
         contentView = MainContentView()
         view = contentView
         
-        configureTableView()
+        contentView.dashboardCollectionView.dataSource = self
+//        contentView.dashboardCollectionView.reloadData()
         
         healthStore = HealthStore()
         
@@ -86,10 +87,6 @@ class DashboardViewController: UIViewController {
     }
     
     // MARK: - Functions
-
-    private func configureTableView() {
-        contentView.dashboardTableView.dataTableView.dataSource = self
-    }
 
     @objc func presentSettingsView() {
         let settingsVC = SettingsViewController()
@@ -134,27 +131,27 @@ class DashboardViewController: UIViewController {
         userDefaults?.set(stepsHistory, forKey: UserDefaultsKey.stepsHistory.rawValue)
         
         DispatchQueue.main.async { [weak self] in
-            self?.contentView.dashboardTableView.dataTableView.reloadData()
+            self?.contentView.dashboardCollectionView.reloadData()
             WidgetCenter.shared.reloadAllTimelines()
         }
     }
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - UICollectionViewDataSource
 
-extension DashboardViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension DashboardViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: DashboardTableViewCell.dashboardTableViewCellIdentifier, for: indexPath) as! DashboardTableViewCell
-        
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DashboardCollectionViewCell.dashboardCollectionViewCellIdentifier, for: indexPath) as! DashboardCollectionViewCell
+
         var array = [Data]()
         Data.allCases.forEach { data in
             array.append(data)
         }
-        
+
         switch array[indexPath.row] {
         case .sleep:
             cell.configureCell(dataType: array[indexPath.row], data: healthStore?.sleepDuration ?? 0.0)
@@ -177,7 +174,7 @@ extension DashboardViewController: UITableViewDataSource {
 
 extension DashboardViewController: SetTargetsDelegate {
     func didUpdateTargets(targetSleep: Double, targetWeight: Double, targetCalories: Double, targetSteps: Double) {
-        contentView.dashboardTableView.dataTableView.reloadData()
+        contentView.dashboardCollectionView.reloadData()
         WidgetCenter.shared.reloadAllTimelines()
     }
 }

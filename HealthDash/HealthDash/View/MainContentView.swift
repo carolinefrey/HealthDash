@@ -23,10 +23,17 @@ class MainContentView: UIView {
         return view
     }()
     
-    let dashboardTableView: DashboardTableView = {
-        let table = DashboardTableView()
-        table.translatesAutoresizingMaskIntoConstraints = false
-        return table
+    lazy var dashboardCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.itemSize = CGSize(width: 350, height: 150)
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.register(DashboardCollectionViewCell.self, forCellWithReuseIdentifier: DashboardCollectionViewCell.dashboardCollectionViewCellIdentifier)
+        collection.backgroundColor = .white
+        return collection
     }()
     
     //MARK: - Initializers
@@ -53,17 +60,17 @@ class MainContentView: UIView {
     
     private func configureViews() {
         addSubview(greetingView)
-        addSubview(dashboardTableView)
+        addSubview(dashboardCollectionView)
                         
         NSLayoutConstraint.activate([            
             greetingView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             greetingView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             greetingView.heightAnchor.constraint(equalToConstant: 80),
             
-            dashboardTableView.topAnchor.constraint(equalTo: greetingView.bottomAnchor),
-            dashboardTableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            dashboardTableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            dashboardTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            dashboardCollectionView.topAnchor.constraint(equalTo: greetingView.bottomAnchor),
+            dashboardCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            dashboardCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            dashboardCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
 }

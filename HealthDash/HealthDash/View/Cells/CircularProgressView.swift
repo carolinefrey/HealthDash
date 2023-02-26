@@ -14,13 +14,13 @@ struct CircularProgressView: View {
         ZStack {
             Circle()
                 .stroke(
-                    Color.pink.opacity(0.5),
+                    Color("TrackColor"),
                     lineWidth: 10
                 )
             Circle()
                 .trim(from: 0, to: progress)
                 .stroke(
-                    Color.pink,
+                    Color("Navy"),
                     style: StrokeStyle (
                         lineWidth: 10,
                         lineCap: .round

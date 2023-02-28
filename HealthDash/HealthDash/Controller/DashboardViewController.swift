@@ -11,15 +11,15 @@ import HealthKit
 import WidgetKit
 
 enum UserDefaultsKey: String {
-    case sleep = "sleep"
+//    case sleep = "sleep"
     case weight = "weight"
     case activeEnergy = "activeEnergy"
     case steps = "steps"
-    case targetSleep = "targetSleep"
+//    case targetSleep = "targetSleep"
     case targetWeight = "targetWeight"
     case targetCalories = "targetCalories"
     case targetSteps = "targetSteps"
-    case sleepHistory = "sleepHistory"
+//    case sleepHistory = "sleepHistory"
     case weightHistory = "weightHistory"
     case activeEnergyHistory = "activeEnergyHistory"
     case stepsHistory = "stepsHistory"
@@ -69,11 +69,15 @@ class DashboardViewController: UIViewController {
 
             }
         }
+    
+        healthStore?.getHealthData()
+        healthStore?.getHealthDataHistory()
+        contentView.dashboardCollectionView.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        refreshData()
+        contentView.dashboardCollectionView.reloadData()
     }
     
     // MARK: - Functions
@@ -85,54 +89,64 @@ class DashboardViewController: UIViewController {
     }
     
     @objc func tapRefreshDataButton() {
-       refreshData()
+        healthStore?.getHealthData()
+        contentView.dashboardCollectionView.reloadData()
     }
 
-    private func refreshData() {
-        let userDefaults = UserDefaults(suiteName: "group.healthDashWidgetCache")
-        
-        healthStore?.getHealthData()
-        healthStore?.getHealthDataHistory()
-        
-        let sleep = healthStore?.sleepDuration
-        let weight = healthStore?.weight
-        let activeEnergy = healthStore?.activeEnergy
-        let steps = healthStore?.stepCount
-        
-        let sleepHistory: [Double] = healthStore?.sleepDurationHistory ?? []
-        let weightHistory: [Double] = healthStore?.weightHistory ?? []
-        let activeEnergyHistory: [Double] = healthStore?.activeEnergyHistory ?? []
-        let stepsHistory: [Double] = healthStore?.stepCountHistory ?? []
-        
-        //send data to shared app group (so widget can access)
-        userDefaults?.setValue(sleep, forKey: UserDefaultsKey.sleep.rawValue)
-        userDefaults?.setValue(weight, forKey: UserDefaultsKey.weight.rawValue)
-        userDefaults?.setValue(activeEnergy, forKey: UserDefaultsKey.activeEnergy.rawValue)
-        userDefaults?.setValue(steps, forKey: UserDefaultsKey.steps.rawValue)
-        
-        userDefaults?.set(sleepHistory, forKey: UserDefaultsKey.sleepHistory.rawValue)
-        userDefaults?.set(weightHistory, forKey: UserDefaultsKey.weightHistory.rawValue)
-        userDefaults?.set(activeEnergyHistory, forKey: UserDefaultsKey.activeEnergyHistory.rawValue)
-        userDefaults?.set(stepsHistory, forKey: UserDefaultsKey.stepsHistory.rawValue)
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.contentView.dashboardCollectionView.reloadData()
-            WidgetCenter.shared.reloadAllTimelines()
-        }
-    }
+    //  ----- FOR WIDGET ONLY -----
+//    private func refreshData() {
+//        healthStore?.getHealthData()
+//
+//        let sleep = healthStore?.sleepDuration
+//        let weight = healthStore?.weight
+//        let activeEnergy = healthStore?.activeEnergy
+//        let steps = healthStore?.stepCount
+//
+//        //send data to shared app group (so widget can access)
+//        userDefaults?.setValue(sleep, forKey: UserDefaultsKey.sleep.rawValue)
+//        userDefaults?.setValue(weight, forKey: UserDefaultsKey.weight.rawValue)
+//        userDefaults?.setValue(activeEnergy, forKey: UserDefaultsKey.activeEnergy.rawValue)
+//        userDefaults?.setValue(steps, forKey: UserDefaultsKey.steps.rawValue)
+//
+//        DispatchQueue.main.async { [weak self] in
+//            self?.contentView.dashboardCollectionView.reloadData()
+//            WidgetCenter.shared.reloadAllTimelines()
+//        }
+//    }
+//
+//    private func fetchHistoricData() {
+//        healthStore?.getHealthDataHistory()
+//
+//        let sleepHistory: [Double] = healthStore?.sleepDurationHistory ?? []
+//        let weightHistory: [Double] = healthStore?.weightHistory ?? []
+//        let activeEnergyHistory: [Double] = healthStore?.activeEnergyHistory ?? []
+//        let stepsHistory: [Double] = healthStore?.stepCountHistory ?? []
+//
+//        //send data to shared app group (so widget can access)
+//        userDefaults?.set(sleepHistory, forKey: UserDefaultsKey.sleepHistory.rawValue)
+//        userDefaults?.set(weightHistory, forKey: UserDefaultsKey.weightHistory.rawValue)
+//        userDefaults?.set(activeEnergyHistory, forKey: UserDefaultsKey.activeEnergyHistory.rawValue)
+//        userDefaults?.set(stepsHistory, forKey: UserDefaultsKey.stepsHistory.rawValue)
+//
+//        DispatchQueue.main.async { [weak self] in
+//            self?.contentView.dashboardCollectionView.reloadData()
+//            WidgetCenter.shared.reloadAllTimelines()
+//        }
+//    }
 }
 
 // MARK: - UICollectionViewDataSource
 
 extension DashboardViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DashboardCollectionViewCell.dashboardCollectionViewCellIdentifier, for: indexPath) as! DashboardCollectionViewCell
         
         struct Item: CellContent {
+            var healthStore: HealthStore
             var dataType: Data
             var dataValue: Double
             var detailLabel: String
@@ -141,10 +155,10 @@ extension DashboardViewController: UICollectionViewDataSource {
         }
         
         let items: [CellContent] = [
-            Item(dataType: .sleep, dataValue: healthStore?.sleepDuration ?? 0.0, detailLabel: "in bed", icon: "bed.double.fill", target: Double(userDefaults?.double(forKey: UserDefaultsKey.targetSleep.rawValue) ?? 0.0)),
-            Item(dataType: .weight, dataValue: healthStore?.weight ?? 0.0, detailLabel: "lbs", icon: "figure.arms.open", target: Double(userDefaults?.double(forKey: UserDefaultsKey.targetWeight.rawValue) ?? 0.0)),
-            Item(dataType: .activeEnergy, dataValue: healthStore?.activeEnergy ?? 0.0, detailLabel: "cals", icon: "flame.fill", target: Double(userDefaults?.double(forKey: UserDefaultsKey.targetCalories.rawValue) ?? 0.0)),
-            Item(dataType: .steps, dataValue: healthStore?.stepCount ?? 0.0, detailLabel: "steps", icon: "shoeprints.fill", target: Double(userDefaults?.double(forKey: UserDefaultsKey.targetSteps.rawValue) ?? 0.0))
+//            Item(healthStore: healthStore!, dataType: .sleep, dataValue: healthStore?.sleepDuration ?? 0.0, detailLabel: "in bed", icon: "bed.double.fill", target: Double(userDefaults?.double(forKey: UserDefaultsKey.targetSleep.rawValue) ?? 0.0)),
+            Item(healthStore: healthStore!, dataType: .weight, dataValue: healthStore?.weight ?? 0.0, detailLabel: "lbs", icon: "figure.arms.open", target: Double(userDefaults?.double(forKey: UserDefaultsKey.targetWeight.rawValue) ?? 0.0)),
+            Item(healthStore: healthStore!, dataType: .activeEnergy, dataValue: healthStore?.activeEnergy ?? 0.0, detailLabel: "cals", icon: "flame.fill", target: Double(userDefaults?.double(forKey: UserDefaultsKey.targetCalories.rawValue) ?? 0.0)),
+            Item(healthStore: healthStore!, dataType: .steps, dataValue: healthStore?.stepCount ?? 0.0, detailLabel: "steps", icon: "shoeprints.fill", target: Double(userDefaults?.double(forKey: UserDefaultsKey.targetSteps.rawValue) ?? 0.0))
         ]
         
         let item = items[indexPath.row]
@@ -157,7 +171,7 @@ extension DashboardViewController: UICollectionViewDataSource {
 // MARK: - SetTargetsDelegate
 
 extension DashboardViewController: SetTargetsDelegate {
-    func didUpdateTargets(targetSleep: Double, targetWeight: Double, targetCalories: Double, targetSteps: Double) {
+    func didUpdateTargets(targetWeight: Double, targetCalories: Double, targetSteps: Double) {
         contentView.dashboardCollectionView.reloadData()
         WidgetCenter.shared.reloadAllTimelines()
     }

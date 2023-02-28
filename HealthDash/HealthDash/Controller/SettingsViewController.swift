@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SetTargetsDelegate: AnyObject {
-    func didUpdateTargets(targetSleep: Double, targetWeight: Double, targetCalories: Double, targetSteps: Double)
+    func didUpdateTargets(targetWeight: Double, targetCalories: Double, targetSteps: Double)
 }
 
 class SettingsViewController: UIViewController {
@@ -27,7 +27,7 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         
         view = contentView
-        contentView.targetSleepTextView.delegate = self
+//        contentView.targetSleepTextView.delegate = self
         contentView.targetWeightTextView.delegate = self
         contentView.targetCaloriesTextView.delegate = self
         contentView.targetStepsTextView.delegate = self
@@ -37,16 +37,16 @@ class SettingsViewController: UIViewController {
     // MARK: - Functions
 
     @objc func saveTargets() {
-        let targetSleep = Double(contentView.targetSleepTextView.text ?? "")
+//        let targetSleep = Double(contentView.targetSleepTextView.text ?? "")
         let targetWeight = Double(contentView.targetWeightTextView.text ?? "")
         let targetCalories = Double(contentView.targetCaloriesTextView.text ?? "")
         let targetSteps = Double(contentView.targetStepsTextView.text ?? "")
-        userDefaults?.set(targetSleep, forKey: "targetSleep")
+//        userDefaults?.set(targetSleep, forKey: "targetSleep")
         userDefaults?.set(targetWeight, forKey: "targetWeight")
         userDefaults?.set(targetCalories, forKey: "targetCalories")
         userDefaults?.set(targetSteps, forKey: "targetSteps")
         dismiss(animated: true)
-        self.delegate?.didUpdateTargets(targetSleep: targetSleep ?? 0.0, targetWeight: targetWeight ?? 0.0, targetCalories: targetCalories ?? 0.0, targetSteps: targetSteps ?? 0.0)
+        self.delegate?.didUpdateTargets(targetWeight: targetWeight ?? 0.0, targetCalories: targetCalories ?? 0.0, targetSteps: targetSteps ?? 0.0)
     }
 }
 

@@ -28,7 +28,7 @@ struct HistoryGraphView: View {
                 yStart: .value("Value", dataPoint.value),
                 yEnd: .value("minValue", 0)
             )
-            .foregroundStyle(.gray)
+            .foregroundStyle(.gray).opacity(0.5)
             .interpolationMethod(.cardinal)
             
             LineMark(
@@ -36,12 +36,12 @@ struct HistoryGraphView: View {
                 y: .value("Value", dataPoint.value)
             )
             .interpolationMethod(.cardinal)
-            .foregroundStyle(.black)
+            .foregroundStyle(Color("Navy"))
         }
         .chartYAxis {
             AxisMarks(position: .leading)
         }
-        .padding(EdgeInsets(top: 50, leading: 25, bottom: 50, trailing: 25))
+        .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
     }
 }
 

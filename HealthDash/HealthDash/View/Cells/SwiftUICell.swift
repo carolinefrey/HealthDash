@@ -9,6 +9,7 @@ import SwiftUI
 import Foundation
 
 protocol CellContent {
+    var healthStore: HealthStore { get }
     var dataType: Data { get }
     var dataValue: Double { get }
     var detailLabel: String { get }
@@ -19,10 +20,9 @@ protocol CellContent {
 struct SwiftUICell: View {
     
     let content: CellContent
-
+    
     var body: some View {
         let progress = content.dataValue / content.target
-        let historicData = [0.0]
         
         HStack {
             ZStack {
@@ -43,7 +43,7 @@ struct SwiftUICell: View {
                 }
             }
             
-            HistoryGraphView(dataPoints: fetchHistoricData(dataType: content.dataType))
+            HistoryGraphView(dataPoints: fetchHistoricData(healthStore: content.healthStore, dataType: content.dataType))
         }
     }
 }
@@ -52,17 +52,18 @@ func formatSleepData(data: Double) -> Double {
     return data / 3600.0
 }
 
-func fetchHistoricData(dataType: Data) -> [Double] {
-    let userDefaults = UserDefaults(suiteName: "group.healthDashWidgetCache")
+func fetchHistoricData(healthStore: HealthStore, dataType: Data) -> [Double] {
+//    let userDefaults = UserDefaults(suiteName: "group.healthDashWidgetCache")
     
     switch dataType {
     case .sleep:
-        return userDefaults?.value(forKey: UserDefaultsKey.sleepHistory.rawValue) as! [Double]
+//        return userDefaults?.value(forKey: UserDefaultsKey.sleepHistory.rawValue) as! [Double]
+        return healthStore.sleepDurationHistory
     case .weight:
-        return userDefaults?.value(forKey: UserDefaultsKey.weightHistory.rawValue) as! [Double]
+        return healthStore.weightHistory
     case .activeEnergy:
-        return userDefaults?.value(forKey: UserDefaultsKey.activeEnergyHistory.rawValue) as! [Double]
+        return healthStore.activeEnergyHistory
     case .steps:
-        return userDefaults?.value(forKey: UserDefaultsKey.stepsHistory.rawValue) as! [Double]
+        return healthStore.stepCountHistory
     }
 }

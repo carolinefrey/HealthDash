@@ -103,7 +103,9 @@ class HealthStore {
         
         let today = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
         
-        weightQuery = HKSampleQuery.init(sampleType: weightType, predicate: today, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, results, error) in
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true) //get most recent data first
+        
+        weightQuery = HKSampleQuery.init(sampleType: weightType, predicate: today, limit: HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor]) { (query, results, error) in
             
             if let result = results?.first as? HKQuantitySample {
                 let bodyMassLB = result.quantity.doubleValue(for: HKUnit.pound())
@@ -154,44 +156,44 @@ class HealthStore {
         }
     }
     
-    func calculateSleep(completion: @escaping (Double) -> Void) {
-        guard let sleepType = HKSampleType.categoryType(forIdentifier: .sleepAnalysis) else {
-            fatalError("Unable to retrieve body mass")
-        }
-        
-        let calendar = NSCalendar.current
-        let now = Date()
-        let components = calendar.dateComponents([.year, .month, .day], from: now)
-        
-        guard let endDate = calendar.date(from: components) else {
-            fatalError("Unable to create the start date")
-        }
-        guard let startDate = calendar.date(byAdding: .day, value: -1, to: endDate) else {
-            fatalError("Unable to create the end date")
-        }
-        
-        let today = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [.strictStartDate])
-        
-        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false) //get most recent data first
-        
-        sleepQuery = HKSampleQuery(sampleType: sleepType, predicate: today, limit: HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor]) { (query, results, error) in
-            
-            var timeInBed = 0.0
-            if let result = results {
-                if let sample = result.first as? HKCategorySample {
-                    if sample.value == HKCategoryValueSleepAnalysis.inBed.rawValue && sample.startDate >= startDate {
-                        let sleepTime = sample.endDate.timeIntervalSince(sample.startDate)
-                        timeInBed += sleepTime
-                    }
-                }
-                completion(timeInBed)
-            }
-        }
-        
-        if let healthStore = healthStore, let query = self.sleepQuery {
-            healthStore.execute(query)
-        }
-    }
+//    func calculateSleep(completion: @escaping (Double) -> Void) {
+//        guard let sleepType = HKSampleType.categoryType(forIdentifier: .sleepAnalysis) else {
+//            fatalError("Unable to retrieve sleep type")
+//        }
+//
+//        let calendar = NSCalendar.current
+//        let now = Date()
+//        let components = calendar.dateComponents([.year, .month, .day], from: now)
+//
+//        guard let endDate = calendar.date(from: components) else {
+//            fatalError("Unable to create the start date")
+//        }
+//        guard let startDate = calendar.date(byAdding: .day, value: -1, to: endDate) else {
+//            fatalError("Unable to create the end date")
+//        }
+//
+//        let today = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [.strictStartDate])
+//
+//        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true) //get most recent data first
+//
+//        sleepQuery = HKSampleQuery(sampleType: sleepType, predicate: today, limit: HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor]) { (query, results, error) in
+//
+//            var timeInBed = 0.0
+//            if let result = results {
+//                if let sample = result.first as? HKCategorySample {
+//                    if sample.value == HKCategoryValueSleepAnalysis.asleepUnspecified.rawValue && sample.startDate >= startDate {
+//                        let sleepTime = sample.endDate.timeIntervalSince(sample.startDate)
+//                        timeInBed += sleepTime
+//                    }
+//                }
+//                completion(timeInBed)
+//            }
+//        }
+//
+//        if let healthStore = healthStore, let query = self.sleepQuery {
+//            healthStore.execute(query)
+//        }
+//    }
     
     func calculateStepsHistory(forPast days: Int, completion: @escaping (Double) -> Void) {
         guard let stepCountType = HKObjectType.quantityType(forIdentifier: .stepCount) else {
@@ -269,9 +271,51 @@ class HealthStore {
         healthStore?.execute(query)
     }
     
-    func calculateSleepHistory(forPast days: Int, completion: @escaping (Double) -> Void) {
-        //TODO: - Implement sleep calculation here
-    }
+//    func calculateSleepHistory(forPast days: Int, completion: @escaping (Double) -> Void) {
+//        guard let sleepType = HKObjectType.categoryType(forIdentifier: .sleepAnalysis) else {
+//            print("Unable to create sleep history type")
+//            return
+//        }
+//
+//        let now = Date()
+//        let startDate = Calendar.current.date(byAdding: DateComponents(day: -days), to: now)!
+//
+////        var interval = DateComponents()
+////        interval.day = 1
+//
+////        var anchorComponents = Calendar.current.dateComponents([.day, .month, .year], from: now)
+////        anchorComponents.hour = 0
+////        let anchorDate = Calendar.current.date(from: anchorComponents)!
+//
+//        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
+//
+//        let last30Days = HKQuery.predicateForSamples(withStart: startDate, end: now)
+//
+//        let query = HKSampleQuery(sampleType: sleepType,
+//                                  predicate: last30Days,
+//                                  limit: 30,
+//                                  sortDescriptors: [sortDescriptor]) { (query, tmpResult, error) in
+//            if error != nil {
+//                print("Error retrieving sleep history data")
+//            }
+//
+////            var timeAsleep = 0.0
+//            var sleepTime = 0.0
+//            if let result = tmpResult {
+//                for item in result {
+//                    if let sample = item as? HKCategorySample {
+//                        if sample.value == HKCategoryValueSleepAnalysis.asleepUnspecified.rawValue && sample.startDate >= startDate {
+//                            sleepTime = sample.endDate.timeIntervalSince(sample.startDate)
+////                            timeAsleep += sleepTime
+//                        }
+//                    }
+//                }
+//                completion(sleepTime)
+//            }
+//        }
+//
+//        healthStore?.execute(query)
+//    }
     
     func calculateActiveEnergyHistory(forPast days: Int, completion: @escaping (Double) -> Void) {
         guard let activeEnergyType = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned) else {
@@ -329,15 +373,20 @@ class HealthStore {
                 self.activeEnergy = calories
             }
         }
-        calculateSleep { duration in
-            if duration > 0 {
-                self.sleepDuration = duration
-            }
-        }
+//        calculateSleep { duration in
+//            if duration > 0 {
+//                self.sleepDuration = duration
+//            }
+//        }
         WidgetCenter.shared.reloadAllTimelines()
     }
     
     func getHealthDataHistory() {
+        self.stepCountHistory = []
+        self.weightHistory = []
+//        self.sleepDurationHistory = []
+        self.activeEnergyHistory = []
+        
         calculateStepsHistory(forPast: 30) { steps in
             self.stepCountHistory.append(steps)
         }
@@ -346,9 +395,9 @@ class HealthStore {
             self.weightHistory.append(weight)
         }
         
-        calculateSleepHistory(forPast: 30) { sleep in
-            self.sleepDurationHistory.append(sleep)
-        }
+//        calculateSleepHistory(forPast: 30) { sleep in
+//            self.sleepDurationHistory.append(sleep)
+//        }
         
         calculateActiveEnergyHistory(forPast: 30) { cals in
             self.activeEnergyHistory.append(cals)

@@ -11,12 +11,12 @@ import SwiftUI
 struct Provider: TimelineProvider {
     //placeholder widget, used to display preview (should make func that fetches dummy data here)
     func placeholder(in context: Context) -> DashboardEntry {
-        DashboardEntry(date: Date(), sleep: 30600, weight: 125.0, activeEnergy: 432, steps: 5698)
+        DashboardEntry(date: Date(), weight: 125.0, activeEnergy: 432, steps: 5698)
     }
     
     //snapshot of what the widget looks like right now, can use same dummy data as above (I think?)
     func getSnapshot(in context: Context, completion: @escaping (DashboardEntry) -> ()) {
-        let entry = DashboardEntry(date: Date(), sleep: 30600, weight: 125.0, activeEnergy: 432, steps: 5698)
+        let entry = DashboardEntry(date: Date(), weight: 125.0, activeEnergy: 432, steps: 5698)
         completion(entry)
     }
     
@@ -24,7 +24,7 @@ struct Provider: TimelineProvider {
         var entries: [DashboardEntry] = []
         
         let userDefaults = UserDefaults(suiteName: "group.healthDashWidgetCache")
-        let sleep = userDefaults?.value(forKey: UserDefaultsKey.sleep.rawValue) as? Double ?? 0.0
+//        let sleep = userDefaults?.value(forKey: UserDefaultsKey.sleep.rawValue) as? Double ?? 0.0
         let weight = userDefaults?.value(forKey: UserDefaultsKey.weight.rawValue) as? Double ?? 0.0
         let activeEnergy = userDefaults?.value(forKey: UserDefaultsKey.activeEnergy.rawValue) as? Double ?? 0.0
         let steps = userDefaults?.value(forKey: UserDefaultsKey.steps.rawValue) as? Double ?? 0.0
@@ -34,7 +34,6 @@ struct Provider: TimelineProvider {
         for hourOffset in 0..<5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
             let entry = DashboardEntry(date: entryDate,
-                                       sleep: sleep,
                                        weight: weight,
                                        activeEnergy: activeEnergy,
                                        steps: steps)
@@ -49,7 +48,7 @@ struct Provider: TimelineProvider {
 //the data
 struct DashboardEntry: TimelineEntry {
     let date: Date
-    let sleep: Double
+//    let sleep: Double
     let weight: Double
     let activeEnergy: Double
     let steps: Double
@@ -62,12 +61,12 @@ struct HealthMetricDashWidgetEntryView : View {
         
         //DATA FORMATTING
         //convert seconds to hours & minutes
-        let secondsInAnHour = 3600.0
-        let hours = entry.sleep / secondsInAnHour
-        let remainder = hours.truncatingRemainder(dividingBy: 1)
-        let minutesRemaining = remainder * 60
-        let hoursFormatted = String(format: "%.0f", hours)
-        let minutes = String(format: "%.0f", minutesRemaining)
+//        let secondsInAnHour = 3600.0
+//        let hours = entry.sleep / secondsInAnHour
+//        let remainder = hours.truncatingRemainder(dividingBy: 1)
+//        let minutesRemaining = remainder * 60
+//        let hoursFormatted = String(format: "%.0f", hours)
+//        let minutes = String(format: "%.0f", minutesRemaining)
         
         let weightFormatted = String(format: "%.1f", entry.weight)
         let activeEnergyFormatted = String(format: "%.0f", entry.activeEnergy)
@@ -75,7 +74,7 @@ struct HealthMetricDashWidgetEntryView : View {
         
         //retrieve targets
         let userDefaults = UserDefaults(suiteName: "group.healthDashWidgetCache")
-        let sleepTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.targetSleep.rawValue) ?? 0.0)
+//        let sleepTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.targetSleep.rawValue) ?? 0.0)
         let weightTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.targetWeight.rawValue) ?? 0.0)
         let calorieTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.targetCalories.rawValue) ?? 0.0)
         let stepTarget = Double(userDefaults?.double(forKey: UserDefaultsKey.targetSteps.rawValue) ?? 0.0)
@@ -85,28 +84,6 @@ struct HealthMetricDashWidgetEntryView : View {
             
             HStack(spacing: -50) {
                 VStack(alignment: .leading, spacing: 30) {
-                    VStack {
-                        HStack {
-                            Image(systemName: "bed.double.fill")
-                                .font(.system(size: 18))
-                                .foregroundColor(Color("TextColor"))
-                            Text("\(hoursFormatted) hrs \(minutes) min")
-                                .font(Font.custom("Oxygen-Regular", size: 18))
-                                .foregroundColor(Color("TextColor"))
-                        }
-                        HStack(spacing: -20) {
-                            ProgressView(value: hours, total: sleepTarget)
-                                .progressViewStyle(LinearProgressViewStyle(tint: (Color("TextColor"))))
-                                .scaleEffect(x: 0.5, y: 0.8, anchor: .center)
-                            if entry.sleep >= sleepTarget {
-                                Image(systemName: "checkmark.circle")
-                                    .resizable().frame(width: 15, height: 15)
-                            } else {
-                                EmptyView()
-                            }
-                        }
-                        .padding([.leading, .trailing], 30)
-                    }
                     
                     VStack {
                         HStack {
@@ -200,7 +177,7 @@ struct HealthMetricDash: Widget {
 
 struct HealthMetricDashWidget_Previews: PreviewProvider {
     static var previews: some View {
-        HealthMetricDashWidgetEntryView(entry: Provider.Entry(date: Date(), sleep: 0.0, weight: 0.0, activeEnergy: 0.0, steps: 0.0))
+        HealthMetricDashWidgetEntryView(entry: Provider.Entry(date: Date(), weight: 0.0, activeEnergy: 0.0, steps: 0.0))
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

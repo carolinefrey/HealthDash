@@ -35,39 +35,39 @@ class SettingsView: UIView {
         return button
     }()
 
-    private let targetSleepTitleLabel: UILabel = {
-        let title = UILabel()
-        title.translatesAutoresizingMaskIntoConstraints = false
-        title.font = UIFont(name: "Oxygen-Regular", size: 18)
-        title.textColor = UIColor(named: "Navy")
-        title.textAlignment = .left
-        title.text = "Target sleep:"
-        return title
-    }()
+//    private let targetSleepTitleLabel: UILabel = {
+//        let title = UILabel()
+//        title.translatesAutoresizingMaskIntoConstraints = false
+//        title.font = UIFont(name: "Oxygen-Regular", size: 18)
+//        title.textColor = UIColor(named: "Navy")
+//        title.textAlignment = .left
+//        title.text = "Target sleep:"
+//        return title
+//    }()
     
-    private let targetSleepExampleLabel: UILabel = {
-        let detail = UILabel()
-        detail.translatesAutoresizingMaskIntoConstraints = false
-        detail.font = UIFont(name: "Oxygen-Regular", size: 14)
-        detail.textColor = UIColor(named: "Navy")
-        detail.textAlignment = .left
-        detail.text = "(as a decimal, ex: 8.5 = 8.5 hours)"
-        return detail
-    }()
+//    private let targetSleepExampleLabel: UILabel = {
+//        let detail = UILabel()
+//        detail.translatesAutoresizingMaskIntoConstraints = false
+//        detail.font = UIFont(name: "Oxygen-Regular", size: 14)
+//        detail.textColor = UIColor(named: "Navy")
+//        detail.textAlignment = .left
+//        detail.text = "(as a decimal, ex: 8.5 = 8.5 hours)"
+//        return detail
+//    }()
     
-    let targetSleepTextView: UITextField = {
-        let field = UITextField()
-        field.translatesAutoresizingMaskIntoConstraints = false
-        field.backgroundColor = UIColor(named: "DarkerBackground")
-        field.returnKeyType = .done
-        field.layer.cornerRadius = 10
-        field.font = UIFont(name: "Oxygen-Regular", size: 18)
-        field.textColor = UIColor(named: "Navy")
-        field.setLeftPadding(10)
-        field.setRightPadding(10)
-        field.keyboardType = .decimalPad
-        return field
-    }()
+//    let targetSleepTextView: UITextField = {
+//        let field = UITextField()
+//        field.translatesAutoresizingMaskIntoConstraints = false
+//        field.backgroundColor = UIColor(named: "DarkerBackground")
+//        field.returnKeyType = .done
+//        field.layer.cornerRadius = 10
+//        field.font = UIFont(name: "Oxygen-Regular", size: 18)
+//        field.textColor = UIColor(named: "Navy")
+//        field.setLeftPadding(10)
+//        field.setRightPadding(10)
+//        field.keyboardType = .decimalPad
+//        return field
+//    }()
 
     private let targetWeightTitleLabel: UILabel = {
         let title = UILabel()
@@ -147,7 +147,7 @@ class SettingsView: UIView {
         super.init(frame: .zero)
         
         backgroundColor = UIColor(named: "MainBackground")
-        targetSleepTextView.text = String(userDefaults?.double(forKey: UserDefaultsKey.targetSleep.rawValue) ?? 0.0)
+//        targetSleepTextView.text = String(userDefaults?.double(forKey: UserDefaultsKey.targetSleep.rawValue) ?? 0.0)
         targetWeightTextView.text = String(userDefaults?.double(forKey:UserDefaultsKey.targetWeight.rawValue) ?? 0.0)
         targetCaloriesTextView.text = String(userDefaults?.double(forKey: UserDefaultsKey.targetCalories.rawValue) ?? 0.0)
         targetStepsTextView.text = String(userDefaults?.double(forKey: UserDefaultsKey.targetSteps.rawValue) ?? 0.0)
@@ -164,9 +164,9 @@ class SettingsView: UIView {
     private func setUpViews() {
         addSubview(viewTitle)
         addSubview(saveSettingsButton)
-        addSubview(targetSleepTitleLabel)
-        addSubview(targetSleepExampleLabel)
-        addSubview(targetSleepTextView)
+//        addSubview(targetSleepTitleLabel)
+//        addSubview(targetSleepExampleLabel)
+//        addSubview(targetSleepTextView)
         addSubview(targetWeightTitleLabel)
         addSubview(targetWeightTextView)
         addSubview(targetCaloriesTitleLabel)
@@ -182,18 +182,18 @@ class SettingsView: UIView {
             saveSettingsButton.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             saveSettingsButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
-            targetSleepTitleLabel.topAnchor.constraint(equalTo: viewTitle.bottomAnchor, constant: 20),
-            targetSleepTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+//            targetSleepTitleLabel.topAnchor.constraint(equalTo: viewTitle.bottomAnchor, constant: 20),
+//            targetSleepTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+//
+//            targetSleepExampleLabel.topAnchor.constraint(equalTo: targetSleepTitleLabel.bottomAnchor),
+//            targetSleepExampleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+//
+//            targetSleepTextView.topAnchor.constraint(equalTo: targetSleepExampleLabel.bottomAnchor, constant: 10),
+//            targetSleepTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+//            targetSleepTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+//            targetSleepTextView.heightAnchor.constraint(equalToConstant: 45),
             
-            targetSleepExampleLabel.topAnchor.constraint(equalTo: targetSleepTitleLabel.bottomAnchor),
-            targetSleepExampleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            
-            targetSleepTextView.topAnchor.constraint(equalTo: targetSleepExampleLabel.bottomAnchor, constant: 10),
-            targetSleepTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            targetSleepTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            targetSleepTextView.heightAnchor.constraint(equalToConstant: 45),
-            
-            targetWeightTitleLabel.topAnchor.constraint(equalTo: targetSleepTextView.bottomAnchor, constant: 20),
+            targetWeightTitleLabel.topAnchor.constraint(equalTo: viewTitle.bottomAnchor, constant: 20),
             targetWeightTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             
             targetWeightTextView.topAnchor.constraint(equalTo: targetWeightTitleLabel.bottomAnchor, constant: 10),

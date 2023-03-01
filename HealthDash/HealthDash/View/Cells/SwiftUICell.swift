@@ -45,6 +45,7 @@ struct SwiftUICell: View {
             
             HistoryGraphView(dataPoints: fetchHistoricData(healthStore: content.healthStore, dataType: content.dataType))
         }
+        .background(.white)
     }
 }
 
